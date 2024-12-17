@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2024/12/16 13:24:39 by flmarsou         ###   ########.fr        #
+#    Updated: 2024/12/17 15:04:56 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,25 @@ VPATH		:=	src:src/utils:src/parser
 
 SRC			:=	main.c \
 
-SRC_UTILS	:=	ft_strcmp.c \
+SRC_UTILS	:=	ft_atouc.c \
+				ft_isalnum.c \
+				ft_isalpha.c \
+				ft_isdigit.c \
+				ft_iskey.c \
+				ft_ispath.c \
+				ft_strcmp.c \
 				ft_strdup.c \
 				ft_strerror.c \
 				ft_strlen.c \
+				ft_strndup.c \
+				get_next_line.c \
 
-SRC_PARSER	:=	parsing.c \
+SRC_PARSER	:=	check_args.c \
+				check_colors.c \
+				check_keys.c \
+				parsing.c \
+				set_colors.c \
+				set_keys.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER}
 OBJ_DIR		:= obj
