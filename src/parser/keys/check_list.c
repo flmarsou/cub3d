@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   check_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 10:56:24 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 15:14:46 by flmarsou         ###   ########.fr       */
+/*   Created: 2024/12/18 14:11:41 by flmarsou          #+#    #+#             */
+/*   Updated: 2024/12/18 14:12:11 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	parsing(int argc, char **argv, t_game *game)
+bool	check_list(t_game *game, bool check)
 {
-	int	fd;
+	unsigned int	i;
 
-	if (!parse_args(argc, argv, &fd))
-		return (false);
-	if (!parse_keys(fd, game))
-		return (close(fd), false);
-	if (!parse_colors(game))
-		return (close(fd), false);
-	if (!parse_map(fd, game))
-		return (close(fd), false);
-	return (close(fd), true);
+	i = 0;
+	while (i < 6)
+	{
+		if (check && !game->file.check_list[i])
+			return (printf(ERR"Missing key(s)!\n"), false);
+		if (!game->file.check_list[i])
+			return (false);
+		i++;
+	}
+	return (true);
 }

@@ -6,32 +6,32 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:45:52 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/17 08:46:00 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:01:15 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	check_args(int argc, char **argv, int *fd)
+bool	parse_args(int argc, char **argv, int *fd)
 {
 	if (argc < 2 || argv[1][0] == '\0')
-		return (ft_strerror("Not enough arguments!"), false);
+		return (printf(ERR"Not enough arguments!\n"), false);
 	if (argc > 2)
-		return (ft_strerror("Too many arguments!"), false);
+		return (printf(ERR"Too many arguments!\n"), false);
 	if (ft_strlen(argv[1]) < 5
 		|| !ft_strcmp(&argv[1][ft_strlen(argv[1]) - 4], ".cub"))
-		return (ft_strerror("Wrong arguments!"), false);
+		return (printf(ERR"Wrong arguments!\n"), false);
 	*fd = open(argv[1], __O_DIRECTORY);
 	if (*fd != -1)
 	{
 		close (*fd);
-		return (ft_strerror("File is a directory!"), false);
+		return (printf(ERR"File is a directory!\n"), false);
 	}
 	*fd = open(argv[1], O_RDONLY);
 	if (*fd == -1)
 	{
 		close(*fd);
-		return (ft_strerror("File not found!"), false);
+		return (printf(ERR"File not found!\n"), false);
 	}
 	return (true);
 }

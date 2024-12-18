@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_colors.c                                     :+:      :+:    :+:   */
+/*   check_rgb_format.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 13:56:52 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/17 15:25:53 by flmarsou         ###   ########.fr       */
+/*   Created: 2024/12/18 14:55:18 by flmarsou          #+#    #+#             */
+/*   Updated: 2024/12/18 14:55:51 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Checks if a RGB string is properly formatted: "XXX,XXX,XXX".
-static bool	is_rgb_format(char *str)
+bool	check_colors(char *str, const char key)
 {
+	const char		*arr[] = {"red", "green", "blue"};
 	unsigned int	values_found;
 	unsigned int	i;
 	unsigned int	digits;
@@ -26,26 +26,17 @@ static bool	is_rgb_format(char *str)
 		digits = 0;
 		while (ft_isdigit(str[i++]))
 			digits++;
-		if (digits == 0 || digits > 3)
-			return (false);
+		if (digits == 0)
+			return (printf(ERR"%c key is missing %s!\n",
+					key, arr[values_found]), false);
+		if (digits > 3)
+			return (printf(ERR"%c key %s is too large!\n",
+					key, arr[values_found]), false);
 		values_found++;
 		if (values_found < 3 && str[i - 1] != ',')
-			return (false);
+			return (printf(ERR"%c key is mistyped!\n", key), false);
 	}
 	if (str[i] != '\0')
-		return (false);
-	return (true);
-}
-
-bool	check_colors(t_game *game)
-{
-	if (!is_rgb_format(game->file.floor.raw)
-		&& !is_rgb_format(game->file.ceiling.raw))
-		return (false);
-	if (ft_strlen(game->file.floor.raw) > 11)
-		return (false);
-	if (ft_strlen(game->file.ceiling.raw) > 11)
-		return (false);
-	set_colors(game);
+		return (printf(ERR"%c key is mistyped!\n", key), false);
 	return (true);
 }

@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atouc.c                                         :+:      :+:    :+:   */
+/*   check_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 14:51:39 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/17 15:24:26 by flmarsou         ###   ########.fr       */
+/*   Created: 2024/12/18 14:05:54 by flmarsou          #+#    #+#             */
+/*   Updated: 2024/12/18 14:07:52 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned char	ft_atouc(char *str)
+bool	check_key(unsigned int key, char *str, unsigned int *len)
 {
-	int		i;
-	int		value;
+	const char		*arr[] = {NULL, "NO", "SO", "WE", "EA", "F", "C"};
+	unsigned int	i;
 
 	i = 0;
-	value = 0;
-	while (ft_isdigit(str[i]))
+	*len = 0;
+	while (ft_iskey(str[i]))
+		i++;
+	while (str[i] == ' ')
+		i++;
+	while (ft_ispath(str[i]))
 	{
-		value = value * 10 + (str[i] - '0');
+		(*len)++;
 		i++;
 	}
-	if (value > 255)
-		value = 255;
-	return (value);
+	if (str[i] != '\0')
+		return (printf(ERR"\"%s\" key is mistyped!\n", arr[key]), false);
+	return (true);
 }

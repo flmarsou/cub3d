@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_keys.c                                         :+:      :+:    :+:   */
+/*   set_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:16:38 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/17 12:21:03 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:04:06 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	set_keys(unsigned int key, char *str, unsigned int len, t_game *game)
+void	set_key(unsigned int key, char *str, unsigned int len, t_game *game)
 {
 	unsigned int	i;
 
