@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:52:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 15:08:21 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 10:22:18 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	init_struct(t_game *game)
 		game->file.check_list[i++] = false;
 	game->file.map = NULL;
 	game->file.facing = 0;
+	game->file.playing_found = false;
 }
 
 int	main(int argc, char **argv)
@@ -67,6 +68,7 @@ int	main(int argc, char **argv)
 	init_struct(&game);
 	if (!parsing(argc, argv, &game))
 		return (1);
-	print_file(game);
+	// print_file(game);
+	free_file(&game);
 	return (0);
 }
