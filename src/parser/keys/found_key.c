@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 13:27:47 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 13:28:56 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 09:03:47 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool	found_key(unsigned int key, t_game *game)
 		game->file.check_list[4] = true;
 	else if (key == C && game->file.check_list[5] == false)
 		game->file.check_list[5] = true;
+	else if (key == NA_KEY)
+		return (true);
 	else
 		return (printf(ERR"\"%s\" key already exists!\n", arr[key]), false);
 	return (true);

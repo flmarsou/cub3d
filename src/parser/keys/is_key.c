@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_key.c                                          :+:      :+:    :+:   */
+/*   is_key.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 12:38:43 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 14:03:02 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 08:51:30 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-unsigned int	get_key(char *line)
+unsigned int	is_key(char *line)
 {
 	unsigned int	i;
 
+	if (!line || *line == '\n' || *line == '\0')
+		return (NA_KEY);
 	i = 0;
 	if (ft_iskey(line[i]) && line[i + 1] && line[i + 2])
 	{
