@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2024/12/18 15:10:53 by flmarsou         ###   ########.fr        #
+#    Updated: 2024/12/19 10:52:29 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,13 @@ VPATH		:=	src : \
 				src/parser : src/parser/args : src/parser/keys : src/parser/colors : src/parser/map \
 
 SRC			:=	main.c \
+				free.c \
 
 SRC_UTILS	:=	ft_isalnum.c \
 				ft_isalpha.c \
 				ft_isdigit.c \
 				ft_iskey.c \
+				ft_ismap.c \
 				ft_ispath.c \
 				ft_strcmp.c \
 				ft_strdup.c \
@@ -33,7 +35,7 @@ SRC_UTILS	:=	ft_isalnum.c \
 
 SRC_PARSER	:=	parsing.c \
 				parse_args.c \
-				parse_keys.c get_key.c found_key.c check_key.c set_key.c check_list.c \
+				parse_keys.c is_key.c found_key.c check_key.c set_key.c check_list.c \
 				parse_colors.c check_colors.c set_colors.c \
 				parse_map.c \
 
@@ -43,16 +45,16 @@ OBJECTS		:=	${SOURCES:%.c=${OBJ_DIR}/%.o}
 
 # Variables
 CC			:=	cc
-CFLAGS		:=  -Iincludes -O2
+CFLAGS		:=  -Iincludes -O2 -static
 
 # Makefile
 all:		${EXE}
 
 ${EXE}:		${OBJECTS}
-			@${CC} ${CFLAGS} $^ -o $@
+			${CC} ${CFLAGS} $^ -o $@
 
 ${OBJ_DIR}/%.o:	%.c | ${OBJ_DIR}
-			@${CC} ${CFLAGS} -c $< -o $@
+			${CC} ${CFLAGS} -c $< -o $@
 
 ${OBJ_DIR}:
 			@mkdir -p $@
