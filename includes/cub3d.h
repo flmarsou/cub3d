@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 15:14:16 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:37:20 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define EA		4
 # define F		5
 # define C		6
+# define NA_KEY	7
 
 struct	s_color
 {
@@ -49,6 +50,7 @@ struct s_file
 	struct s_color	ceiling;		// Ceiling colors
 	bool			check_list[6];
 	char			**map;			// 2D Array to store the map
+	bool			playing_found;
 	char			facing;			// Starting facing direction
 };
 
@@ -58,6 +60,12 @@ typedef struct s_game
 }	t_game;
 
 //============================================================================//
+//     Source                                                                 //
+//============================================================================//
+
+void			free_file(t_game *game);
+
+//============================================================================//
 //     Utils                                                                  //
 //============================================================================//
 
@@ -65,6 +73,7 @@ bool			ft_isalnum(char c);
 bool			ft_isalpha(char c);
 bool			ft_isdigit(char c);
 bool			ft_iskey(char c);
+bool			ft_ismap(char c);
 bool			ft_ispath(char c);
 bool			ft_strcmp(char *str1, char *str2);
 
@@ -116,7 +125,7 @@ bool			parse_keys(int fd, t_game *game);
  * @param line The string to be checked.
  * @return The corresponding key enum value, or 0 if no match is found.
  */
-unsigned int	get_key(char *line);
+unsigned int	is_key(char *line);
 
 /**
  * @brief Marks a key as found and ensures it is not duplicated.
