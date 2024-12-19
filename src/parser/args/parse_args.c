@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_args.c                                       :+:      :+:    :+:   */
+/*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 08:45:52 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 14:01:15 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 12:17:59 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,9 @@ bool	parse_args(int argc, char **argv, int *fd)
 		return (printf(ERR"Wrong arguments!\n"), false);
 	*fd = open(argv[1], __O_DIRECTORY);
 	if (*fd != -1)
-	{
-		close (*fd);
 		return (printf(ERR"File is a directory!\n"), false);
-	}
 	*fd = open(argv[1], O_RDONLY);
 	if (*fd == -1)
-	{
-		close(*fd);
 		return (printf(ERR"File not found!\n"), false);
-	}
 	return (true);
 }

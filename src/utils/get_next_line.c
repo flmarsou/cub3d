@@ -6,13 +6,13 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 14:56:06 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/17 12:21:27 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:29:49 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define BUFFER_SIZE	10
+#define BUFFER_SIZE	256
 
 char	*get_next_line(int fd)
 {
