@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/19 11:37:20 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/19 15:11:18 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,5 +202,9 @@ void			set_colors(t_game *game);
 //====================================//
 
 bool			parse_map(int fd, t_game *game);
+
+unsigned int	check_map_line(char *line, t_game *game);
+
+void			set_map(t_game *game, char *line, unsigned int len);
 
 #endif

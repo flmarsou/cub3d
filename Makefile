@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2024/12/19 10:52:29 by marvin           ###   ########.fr        #
+#    Updated: 2024/12/19 15:29:59 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ SRC_PARSER	:=	parsing.c \
 				parse_args.c \
 				parse_keys.c is_key.c found_key.c check_key.c set_key.c check_list.c \
 				parse_colors.c check_colors.c set_colors.c \
-				parse_map.c \
+				parse_map.c check_map_line.c set_map.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER}
 OBJ_DIR		:= obj
@@ -45,16 +45,16 @@ OBJECTS		:=	${SOURCES:%.c=${OBJ_DIR}/%.o}
 
 # Variables
 CC			:=	cc
-CFLAGS		:=  -Iincludes -O2 -static
+CFLAGS		:=  -Iincludes -O2 -flto
 
 # Makefile
 all:		${EXE}
 
 ${EXE}:		${OBJECTS}
-			${CC} ${CFLAGS} $^ -o $@
+			@${CC} -Wl,-s ${CFLAGS} $^ -o $@
 
 ${OBJ_DIR}/%.o:	%.c | ${OBJ_DIR}
-			${CC} ${CFLAGS} -c $< -o $@
+			@${CC} ${CFLAGS} -c $< -o $@
 
 ${OBJ_DIR}:
 			@mkdir -p $@
