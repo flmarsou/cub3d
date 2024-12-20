@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:52:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 12:15:11 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:27:04 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ static void	init_struct(t_game *game)
 	game->file.map = NULL;
 	game->file.facing = 0;
 	game->file.player_found = false;
-	game->file.x = 0;
-	game->file.y = 0;
+	game->file.height = 0;
 	game->file.pos_x = 0;
 	game->file.pos_y = 0;
 }
