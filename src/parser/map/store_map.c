@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_map.c                                          :+:      :+:    :+:   */
+/*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:10:50 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/19 15:17:42 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:39:27 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char **realloc_arr(char **map, unsigned int old_len, unsigned int new_len
 	return (tmp);
 }
 
-void	set_map(t_game *game, char *line, unsigned int len)
+void	store_map(t_game *game, char *line, unsigned int len)
 {
 	char	**new_map;
 

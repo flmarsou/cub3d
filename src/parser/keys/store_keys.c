@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_key.c                                        :+:      :+:    :+:   */
+/*   store_key.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 14:05:54 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 14:07:52 by flmarsou         ###   ########.fr       */
+/*   Created: 2024/12/17 12:16:38 by flmarsou          #+#    #+#             */
+/*   Updated: 2024/12/20 09:33:01 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	check_key(unsigned int key, char *str, unsigned int *len)
+void	store_key(unsigned int key, char *str, unsigned int len, t_game *game)
 {
-	const char		*arr[] = {NULL, "NO", "SO", "WE", "EA", "F", "C"};
 	unsigned int	i;
 
 	i = 0;
-	*len = 0;
 	while (ft_iskey(str[i]))
 		i++;
 	while (str[i] == ' ')
 		i++;
-	while (ft_ispath(str[i]))
-	{
-		(*len)++;
-		i++;
-	}
-	if (str[i] != '\0')
-		return (printf(ERR"\"%s\" key is mistyped!\n", arr[key]), false);
-	return (true);
+	if (key == NO)
+		game->file.no_path = ft_strndup(str + i, len);
+	else if (key == SO)
+		game->file.so_path = ft_strndup(str + i, len);
+	else if (key == WE)
+		game->file.we_path = ft_strndup(str + i, len);
+	else if (key == EA)
+		game->file.ea_path = ft_strndup(str + i, len);
+	else if (key == F)
+		game->file.floor.raw = ft_strndup(str + i, len);
+	else if (key == C)
+		game->file.ceiling.raw = ft_strndup(str + i, len);
 }

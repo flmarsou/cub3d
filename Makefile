@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2024/12/19 15:29:59 by flmarsou         ###   ########.fr        #
+#    Updated: 2024/12/20 10:18:08 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,9 +35,9 @@ SRC_UTILS	:=	ft_isalnum.c \
 
 SRC_PARSER	:=	parsing.c \
 				parse_args.c \
-				parse_keys.c is_key.c found_key.c check_key.c set_key.c check_list.c \
-				parse_colors.c check_colors.c set_colors.c \
-				parse_map.c check_map_line.c set_map.c \
+				parse_keys.c store_keys.c \
+				parse_colors.c store_colors.c \
+				parse_map.c store_map.c check_map.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER}
 OBJ_DIR		:= obj

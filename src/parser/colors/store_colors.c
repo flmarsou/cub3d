@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_colors.c                                       :+:      :+:    :+:   */
+/*   store_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:30:16 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/18 15:05:22 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 09:36:24 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static unsigned char	get_red(char *str, const char key)
 	return (ft_atouc(red, key, 0));
 }
 
-void	set_colors(t_game *game)
+void	store_colors(t_game *game)
 {
 	game->file.floor.r = get_red(game->file.floor.raw, 'F');
 	game->file.floor.g = get_green(game->file.floor.raw, 'F');

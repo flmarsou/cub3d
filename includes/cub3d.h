@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/19 15:11:18 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:41:03 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define ERR	"\e[38;2;178;36;48m\e[1m[x] - Error: \e[38;2;255;255;255m"
 # define WARN	"\e[38;2;186;79;155m\e[1m[!] - Warning: \e[38;2;255;255;255m"
+# define OK		"\e[38;2;25;159;54m\e[1m[o] - Success: \e[38;2;255;255;255m"
 
 # define NO		1
 # define SO		2
@@ -50,7 +51,7 @@ struct s_file
 	struct s_color	ceiling;		// Ceiling colors
 	bool			check_list[6];
 	char			**map;			// 2D Array to store the map
-	bool			playing_found;
+	bool			player_found;
 	char			facing;			// Starting facing direction
 };
 
@@ -154,7 +155,7 @@ bool			check_key(unsigned int key, char *str, unsigned int *len);
  * @param len Length of the path from `str`.
  * @param game Pointer to the main structure.
  */
-void			set_key(unsigned int key, char *str, unsigned int len,
+void			store_key(unsigned int key, char *str, unsigned int len,
 					t_game *game);
 
 /**
@@ -188,14 +189,14 @@ bool			parse_colors(t_game *game);
  * @param key The key character ('F' or 'C') for error messages.
  * @return True if the format is valid, false otherwise.
  */
-bool			check_colors(char *str, const char key);
+bool			check_format(char *str, const char key);
 
 /**
  * @brief Extracts and stores RGB color values for the floor and ceiling keys.
  * 
  * @param game Pointer to the main structure.
  */
-void			set_colors(t_game *game);
+void			store_colors(t_game *game);
 
 //====================================//
 //     Map                            //
@@ -203,8 +204,12 @@ void			set_colors(t_game *game);
 
 bool			parse_map(int fd, t_game *game);
 
+bool			read_map(int fd, t_game *game);
+
 unsigned int	check_map_line(char *line, t_game *game);
 
-void			set_map(t_game *game, char *line, unsigned int len);
+void			store_map(t_game *game, char *line, unsigned int len);
+
+bool			check_map(t_game *game);
 
 #endif
