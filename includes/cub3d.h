@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 11:45:27 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 12:13:58 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # define C		6
 # define NA_KEY	7
 
+# define N		'N'
+# define S		'S'
+# define W		'W'
+# define E		'E'
+
 struct	s_color
 {
 	char			*raw;
@@ -43,6 +48,7 @@ struct	s_color
 
 struct s_file
 {
+	// Keys
 	char			*no_path;		// Path to north texture
 	char			*so_path;		// Path to south texture
 	char			*we_path;		// Path to west texture
@@ -50,9 +56,14 @@ struct s_file
 	struct s_color	floor;			// Floor colors
 	struct s_color	ceiling;		// Ceiling colors
 	bool			check_list[6];	// Key Registry
+	// Map
 	char			**map;			// 2D Array to store the map
 	bool			player_found;
 	char			facing;			// Starting facing direction
+	unsigned int	x;			// Width of the map
+	unsigned int	y;			// Height of the map
+	unsigned int	pos_x;			// Player starting X pos
+	unsigned int	pos_y;			// Player starting Y pos
 };
 
 typedef struct s_game
