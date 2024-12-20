@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 11:41:03 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:45:27 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ struct s_file
 	char			*ea_path;		// Path to east texture
 	struct s_color	floor;			// Floor colors
 	struct s_color	ceiling;		// Ceiling colors
-	bool			check_list[6];
+	bool			check_list[6];	// Key Registry
 	char			**map;			// 2D Array to store the map
 	bool			player_found;
 	char			facing;			// Starting facing direction

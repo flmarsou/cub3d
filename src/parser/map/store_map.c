@@ -6,24 +6,24 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:10:50 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 09:39:27 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:46:20 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char **realloc_arr(char **map, unsigned int old_len, unsigned int new_len)
+static char	**realloc_arr(char **map, unsigned int len, unsigned int new_len)
 {
 	char			**tmp;
 	unsigned int	i;
-	
+
 	tmp = malloc(sizeof(char *) * (new_len + 1));
 	if (!tmp)
 		exit(1);
 	i = 0;
-	while (i < old_len)
+	while (i < len)
 	{
-        tmp[i] = map[i];
+		tmp[i] = map[i];
 		i++;
 	}
 	tmp[new_len] = NULL;

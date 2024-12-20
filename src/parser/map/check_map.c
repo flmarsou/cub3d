@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 11:32:40 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:46:42 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 bool	check_map(t_game *game)
 {
-	
+	return (true);
 }

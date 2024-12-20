@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:01:58 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 09:34:04 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 11:46:31 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ bool	found_key(unsigned int key, t_game *game)
 		return (printf(ERR"\"%s\" key already exists!\n", arr[key]), false);
 	return (true);
 }
-
 
 unsigned int	is_key(char *line)
 {
