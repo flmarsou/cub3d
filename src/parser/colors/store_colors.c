@@ -6,14 +6,14 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:30:16 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 09:36:24 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:12:33 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static unsigned char	ft_atouc(char *str, const char key,
-	const unsigned int rgb)
+	const unsigned int color)
 {
 	const char		*arr[] = {"red", "green", "blue"};
 	unsigned int	i;
@@ -28,7 +28,7 @@ static unsigned char	ft_atouc(char *str, const char key,
 	}
 	if (value > 255)
 	{
-		printf(WARN"In %c key, %s value has been set to max.\n", key, arr[rgb]);
+		error_colors(5, key, color);
 		return (255);
 	}
 	return (value);

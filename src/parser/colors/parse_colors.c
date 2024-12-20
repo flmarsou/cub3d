@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:56:52 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 09:38:19 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:06:44 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,10 @@
 static bool	check_digits(unsigned int digits, const char key,
 	unsigned int values_found)
 {
-	const char		*arr[] = {"red", "green", "blue"};
-
 	if (digits == 0)
-		return (printf(ERR"%c key is missing %s!\n",
-				key, arr[values_found]), false);
+		return (error_colors(1, key, values_found));
 	if (digits > 3)
-		return (printf(ERR"%c key %s is too large!\n",
-				key, arr[values_found]), false);
+		return (error_colors(2, key, values_found));
 	return (true);
 }
 
@@ -46,10 +42,10 @@ bool	check_format(char *str, const char key)
 			return (false);
 		values_found++;
 		if (values_found < 3 && str[i++] != ',')
-			return (printf(ERR"%c key is mistyped!\n", key), false);
+			return (error_colors(3, key, 0));
 	}
 	if (str[i] != '\0')
-		return (printf(ERR"%c key is mistyped!\n", key), false);
+		return (error_colors(4, key, 0));
 	return (true);
 }
 

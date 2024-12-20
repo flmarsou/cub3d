@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:01:58 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 11:46:31 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:57:18 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ bool	check_list(t_game *game, bool check)
 	while (i < 6)
 	{
 		if (check && !game->file.check_list[i])
-			return (printf(ERR"Missing key(s)!\n"), false);
+			return (error_keys(4, 0, 0));
 		if (!game->file.check_list[i])
 			return (false);
 		i++;
@@ -30,7 +30,6 @@ bool	check_list(t_game *game, bool check)
 
 bool	check_key(unsigned int key, char *str, unsigned int *len)
 {
-	const char		*arr[] = {NULL, "NO", "SO", "WE", "EA", "F", "C"};
 	unsigned int	i;
 
 	i = 0;
@@ -45,14 +44,12 @@ bool	check_key(unsigned int key, char *str, unsigned int *len)
 		i++;
 	}
 	if (str[i] != '\0')
-		return (printf(ERR"\"%s\" key is mistyped!\n", arr[key]), false);
+		return (error_keys(3, 0, key));
 	return (true);
 }
 
 bool	found_key(unsigned int key, t_game *game)
 {
-	const char		*arr[] = {NULL, "NO", "SO", "WE", "EA", "F", "C"};
-
 	if (key == NO && game->file.check_list[0] == false)
 		game->file.check_list[0] = true;
 	else if (key == SO && game->file.check_list[1] == false)
@@ -68,7 +65,7 @@ bool	found_key(unsigned int key, t_game *game)
 	else if (key == NA_KEY)
 		return (true);
 	else
-		return (printf(ERR"\"%s\" key already exists!\n", arr[key]), false);
+		return (error_keys(2, 0, key));
 	return (true);
 }
 
@@ -110,7 +107,7 @@ bool	parse_keys(int fd, t_game *game)
 	{
 		key = is_key(line);
 		if (key == 0)
-			return (free(line), printf(ERR"Unrecognized line %u!\n", i), false);
+			return (free(line), error_keys(1, i, 0));
 		if (!found_key(key, game) || !check_key(key, line, &len))
 			return (free(line), false);
 		store_key(key, line, len, game);

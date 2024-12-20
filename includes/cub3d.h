@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 12:13:58 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/20 15:59:53 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@
 # include <stdbool.h>	// BooleansRenamed
 # include "ansi.h"		// ANSI Defines
 
+// Debug
 # define ERR	"\e[38;2;178;36;48m\e[1m[x] - Error: \e[38;2;255;255;255m"
 # define WARN	"\e[38;2;186;79;155m\e[1m[!] - Warning: \e[38;2;255;255;255m"
 # define OK		"\e[38;2;25;159;54m\e[1m[o] - Success: \e[38;2;255;255;255m"
 
+// Keys
 # define NO		1
 # define SO		2
 # define WE		3
@@ -33,10 +35,14 @@
 # define C		6
 # define NA_KEY	7
 
+// Map Characters
 # define N		'N'
 # define S		'S'
 # define W		'W'
 # define E		'E'
+# define EMPTY	' '
+# define WALL	'1'
+# define GROUND	'0'
 
 struct	s_color
 {
@@ -60,10 +66,9 @@ struct s_file
 	char			**map;			// 2D Array to store the map
 	bool			player_found;
 	char			facing;			// Starting facing direction
-	unsigned int	x;			// Width of the map
-	unsigned int	y;			// Height of the map
 	unsigned int	pos_x;			// Player starting X pos
 	unsigned int	pos_y;			// Player starting Y pos
+	unsigned int	height;			// Map Height
 };
 
 typedef struct s_game
@@ -114,6 +119,15 @@ bool			parsing(int argc, char **argv, t_game *game);
  * @return True if `args` are valid and the `fd` can be opened, false otherwise.
  */
 bool			parse_args(int argc, char **argv, int *fd);
+
+/**
+ * 1: "Not enough arguments!"
+ * 2: "Too many arguments!"
+ * 3: "Wrong arguments!"
+ * 4: "File is a directory!"
+ * 5: "File not found!"
+ */
+bool			error_args(const unsigned int error);
 
 //====================================//
 //     Keys                           //
@@ -179,6 +193,15 @@ void			store_key(unsigned int key, char *str, unsigned int len,
  */
 bool			check_list(t_game *game, bool check);
 
+/**
+ * 1: "Unrecognized line `line`"
+ * 2: "`key_enum` key already exists!"
+ * 3: "`key_enum` key is mistyped"
+ * 4: "Missing key(s)!""
+ */
+bool			error_keys(const unsigned int error, unsigned int line,
+					const unsigned int key);
+
 //====================================//
 //     Colors                         //
 //====================================//
@@ -209,18 +232,75 @@ bool			check_format(char *str, const char key);
  */
 void			store_colors(t_game *game);
 
+/**
+ * 1: "`key_char` key is missing `color`!"
+ * 2: "`color` is too large in `key_char` key!"
+ * 3: "`key_char` key is mistyped!"
+ * 4: "Unrecognized character(s) after `key_char` key!"
+ * 5: "In `key_char` key `color` value has been set to max."
+ */
+bool			error_colors(const unsigned int error, const char key,
+					unsigned int color);
 //====================================//
 //     Map                            //
 //====================================//
 
+/**
+ * @brief Parses and validates keys from the input configuration file.
+ * 
+ * @param fd Pointer to the file descriptor of the configuration file.
+ * @param game Pointer to the main structure.
+ * @return True if the map is valid, false otherwise.
+ */
 bool			parse_map(int fd, t_game *game);
 
+/**
+ * @brief Reads lines from the file after the keys.
+ * 
+ * @param fd Pointer to the file descriptor of the configuration file.
+ * @param game Pointer to the main structure.
+ * @return True if the map is valid, false otherwise.
+ */
 bool			read_map(int fd, t_game *game);
 
-unsigned int	check_map_line(char *line, t_game *game);
+/**
+ * @brief Checks if the given string only have map characters.
+ * 
+ * Supported keys are: '0', '1', ' ', ('N', 'S', 'W', 'E' only once).
+ * @param game Pointer to the main structure.
+ * @param line The string to be checked.
+ * @return 2 if empty or 0 if correct, 1 otherwise.
+ */
+unsigned int	check_map_line(t_game *game, char *line);
 
-void			store_map(t_game *game, char *line, unsigned int len);
+/**
+ * @brief Copies the address of the line in the game struct.
+ * 
+ * @param game Pointer to the main structure.
+ * @param line The string to be checked.
+ * @param line_index Iteration of line from the map.
+ */
+void			store_map(t_game *game, char *line, unsigned int line_index);
+
+/**
+ * @brief Stores the player's (X, Y) position, and its facing direction.
+ * 
+ * @param game Pointer to the main structure.
+ * @param line The string to be checked.
+ * @param line_index Iteration of line from the map.
+ */
+void			store_player_info(t_game *game, char *line,
+					unsigned int line_index);
 
 bool			check_map(t_game *game);
+
+/**
+ * 1: "Unrecognized character in map `char`!"
+ * 2: "Multiple players found in the map!"
+ * 3: "No player found in the map!"
+ * 4: "Map is opened X: `x` Y: `y`"
+ */
+bool			error_map(const unsigned int error, const char c,
+					const unsigned int x, const unsigned int y);
 
 #endif
