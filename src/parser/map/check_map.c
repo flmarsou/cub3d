@@ -6,14 +6,14 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/23 09:54:33 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:07:12 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// Checks if the '0' characters of every lines don't have ' ' neighboring them.
-// Skips top/botttom lines, and most right/left characters.
+// Checks if all '0' are fully enclosed by '1', with no adjacent ' '.
+// Skips top/botttom lines, and rightmost/leftmost characters.
 static bool	check_closed(t_game *game)
 {
 	unsigned int	x;
@@ -40,7 +40,7 @@ static bool	check_closed(t_game *game)
 	return (true);
 }
 
-// Checks if the most left and right characters of every lines are '1' or ' '.
+// Checks if the leftmost and rightmost characters of each row are '1' or ' '.
 static bool	check_sides(t_game *game)
 {
 	unsigned int	y;
@@ -58,7 +58,7 @@ static bool	check_sides(t_game *game)
 	return (true);
 }
 
-// Checks if the top and bottom lines are only '1' or ' ' characters.
+// Checks if the top and bottom rows consist only of '1' or ' ' characters.
 static bool	check_top_bottom(t_game *game)
 {
 	unsigned int	x;

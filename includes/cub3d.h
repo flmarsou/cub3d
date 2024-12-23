@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 15:59:53 by flmarsou         ###   ########.fr       */
+/*   Updated: 2024/12/23 14:09:07 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ void			store_colors(t_game *game);
  */
 bool			error_colors(const unsigned int error, const char key,
 					unsigned int color);
+
 //====================================//
 //     Map                            //
 //====================================//
@@ -292,6 +293,14 @@ void			store_map(t_game *game, char *line, unsigned int line_index);
 void			store_player_info(t_game *game, char *line,
 					unsigned int line_index);
 
+/**
+ * @brief Validates the game map to ensure it meets the required constraints
+ * 
+ * 1. The top and bottom rows consist only of '1' or ' ' characters.
+ * 2. The leftmost and rightmost characters of each row are '1' or ' '.
+ * 3. All '0' are fully enclosed by '1', with no adjacent ' '.
+ * @param game Pointer to the main structure.
+ */
 bool			check_map(t_game *game);
 
 /**
@@ -302,5 +311,9 @@ bool			check_map(t_game *game);
  */
 bool			error_map(const unsigned int error, const char c,
 					const unsigned int x, const unsigned int y);
+
+//============================================================================//
+//     MLX                                                                    //
+//============================================================================//
 
 #endif
