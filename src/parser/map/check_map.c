@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/23 14:07:12 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/05 10:46:52 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static bool	check_closed(t_game *game)
 		x = 1;
 		while (game->file.map[y][x + 1])
 		{
-			if (game->file.map[y][x] == GROUND)
+			if (game->file.map[y][x] == GROUND
+				|| game->file.map[y][x] == 'N' || game->file.map[y][x] == 'S'
+				|| game->file.map[y][x] == 'W' || game->file.map[y][x] == 'E')
 			{
 				if (game->file.map[y + 1][x] == EMPTY
 					|| game->file.map[y - 1][x] == EMPTY
