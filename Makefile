@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/17 09:01:39 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/17 10:16:05 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ EXE			:=	cub3d
 VPATH		:=	src : \
 				src/utils : \
 				src/parser : src/parser/args : src/parser/keys : src/parser/colors : src/parser/map \
+				src/mlx \
 
 SRC			:=	main.c \
 				free.c \
@@ -39,38 +40,42 @@ SRC_PARSER	:=	parsing.c \
 				parse_colors.c store_colors.c error_colors.c \
 				parse_map.c store_map.c check_map.c error_map.c \
 
-SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER}
+SRC_MLX		:=	game_loop.c \
+				handle_keypress.c \
+				game_stop.c \
+
+SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER} ${SRC_MLX}
 OBJ_DIR		:= obj
 OBJECTS		:=	${SOURCES:%.c=${OBJ_DIR}/%.o}
 
 # Libraries
-MINILIBX	:=	./includes/.MiniLibX
+MINILIBX	:=	includes/.MiniLibX
 
 # Variables
 CC			:=	cc
-CFLAGS		:=  -Wall -Werror -Wextra  -Iincludes -O2 -flto -fsanitize=address -g
-LIBXFLAGS	:=	-lmlx -lX11 -lXext -lm
+CFLAGS		:=  -Wall -Werror -Wextra -Iincludes -Iincludes/.MiniLibX -O2 #-fsanitize=address -g
+LIBXFLAGS	:=	-L${MINILIBX} -lmlx -lX11 -lXext -lm
 
 # Makefile
-all:		${EXE}
+all:			${EXE}
 
-${EXE}:		${OBJECTS}
-			@${MAKE} -C ${MINILIBX} > /dev/null 2>&1
-			@${CC} ${CFLAGS}  $^ -o $@
+${EXE}:			${OBJECTS}
+				@${MAKE} -C ${MINILIBX} > /dev/null 2>&1
+				@${CC} ${CFLAGS} ${OBJECTS} ${LIBXFLAGS} -o ${EXE}
 
 ${OBJ_DIR}/%.o:	%.c | ${OBJ_DIR}
-			@${CC} ${CFLAGS} -c $< -o $@
+				@${CC} ${CFLAGS} -c $< -o $@
 
 ${OBJ_DIR}:
-			@mkdir -p $@
+				@mkdir -p $@
 
 clean:
-			@${MAKE} -C ${MINILIBX} clean > /dev/null
-			@rm -rf obj
+				@${MAKE} -C ${MINILIBX} clean > /dev/null
+				@rm -rf obj
 
-fclean:		clean
-			@rm -rf ${EXE}
+fclean:			clean
+				@rm -rf ${EXE}
 
-re:			fclean all
+re:				fclean all
 
-.PHONY:		all clean fclean re
+.PHONY:			all clean fclean re
