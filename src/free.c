@@ -6,13 +6,13 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 08:45:23 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/19 15:10:20 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:16:53 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	free_file(t_game *game)
+void	free_game_struct(t_game *game)
 {
 	unsigned int	i;
 
