@@ -6,20 +6,26 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 08:38:41 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:22:08 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <fcntl.h>		// open
-# include <unistd.h>	// close, read, write
-# include <stdio.h>		// printf, perror
-# include <stdlib.h>	// malloc, free
-# include <string.h>	// strerror, exit
-# include <stdbool.h>	// BooleansRenamed
-# include "ansi.h"		// ANSI Defines
+# include "ansi.h"			// ANSI Defines
+# include "mlx.h"	// MiniLibX
+
+# include <fcntl.h>			// open
+# include <unistd.h>		// close, read, write
+# include <stdio.h>			// printf, perror
+# include <stdlib.h>		// malloc, free
+# include <string.h>		// strerror, exit
+# include <stdbool.h>		// Booleans
+
+//============================================================================//
+//     Defines                                                                //
+//============================================================================//
 
 // Debug
 # define ERR	"\e[38;2;178;36;48m\e[1m[x] - Error: \e[38;2;255;255;255m"
@@ -43,6 +49,32 @@
 # define EMPTY	' '
 # define WALL	'1'
 # define GROUND	'0'
+
+// MiniLibX - Window
+# define X_WIN				1280
+# define Y_WIN				720
+# define WIN_TITLE			"Cub3D - By flmarsou and rdedola"
+
+// MiniLibX - Events
+# define KEY_PRESS			2
+# define DESTROY_NOTIFY		17
+
+// MiniLibX - Masks
+# define NO_EVENT_MASK		0L
+# define KEY_PRESS_MASK		(1L<<0)
+
+// MiniLibX - Keys
+# define KEY_ESC			65307
+# define KEY_ARROW_LEFT		65361
+# define KEY_ARROW_RIGHT	65363
+# define KEY_W				119
+# define KEY_A				97
+# define KEY_S				115
+# define KEY_D				100
+
+//============================================================================//
+//     Structs                                                                //
+//============================================================================//
 
 struct	s_color
 {
@@ -71,9 +103,16 @@ struct s_file
 	unsigned int	height;			// Map Height
 };
 
+struct s_mlx
+{
+	void			*mlx;
+	void			*win;
+};
+
 typedef struct s_game
 {
 	struct s_file	file;
+	struct s_mlx	mlx;
 }	t_game;
 
 //============================================================================//
@@ -81,7 +120,7 @@ typedef struct s_game
 //============================================================================//
 
 // Free
-void			free_file(t_game *game);
+void			free_game_struct(t_game *game);
 
 // Debug
 void			print_file(t_game game);
@@ -317,7 +356,13 @@ bool			error_map(const unsigned int error, const char c,
 					const unsigned int x, const unsigned int y);
 
 //============================================================================//
-//     MLX                                                                    //
+//     MiniLibX                                                               //
 //============================================================================//
+
+void			game_loop(t_game *game);
+
+int				handle_keypress(int key, t_game *game);
+
+int				close_game(t_game *game);
 
 #endif
