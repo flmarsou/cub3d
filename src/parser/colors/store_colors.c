@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:30:16 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 09:01:09 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:12:13 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,16 @@ static unsigned char	get_red(char *str, const char key)
 
 void	store_colors(t_game *game)
 {
-	game->file.floor.r = get_red(game->file.floor.raw, 'F');
-	game->file.floor.g = get_green(game->file.floor.raw, 'F');
-	game->file.floor.b = get_blue(game->file.floor.raw, 'F');
-	game->file.ceiling.r = get_red(game->file.ceiling.raw, 'C');
-	game->file.ceiling.g = get_green(game->file.ceiling.raw, 'C');
-	game->file.ceiling.b = get_blue(game->file.ceiling.raw, 'C');
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+
+	r = get_red(game->file.floor.raw, 'F');
+	g = get_green(game->file.floor.raw, 'F');
+	b = get_blue(game->file.floor.raw, 'F');
+	game->file.floor.hex_value = (int)r << 16 | (int)g << 8 | (int)b;
+	r = get_red(game->file.ceiling.raw, 'C');
+	g = get_green(game->file.ceiling.raw, 'C');
+	b = get_blue(game->file.ceiling.raw, 'C');
+	game->file.ceiling.hex_value = (int)r << 16 | (int)g << 8 | (int)b;
 }
