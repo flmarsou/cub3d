@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/17 10:16:05 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/17 13:46:47 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ SRC_PARSER	:=	parsing.c \
 				parse_map.c store_map.c check_map.c error_map.c \
 
 SRC_MLX		:=	game_loop.c \
+				init_window.c \
+				init_background.c \
 				handle_keypress.c \
 				game_stop.c \
 
@@ -53,7 +55,7 @@ MINILIBX	:=	includes/.MiniLibX
 
 # Variables
 CC			:=	cc
-CFLAGS		:=  -Wall -Werror -Wextra -Iincludes -Iincludes/.MiniLibX -O2 #-fsanitize=address -g
+CFLAGS		:=  -Wall -Wextra -Iincludes -Iincludes/.MiniLibX -O2 #-fsanitize=address -g
 LIBXFLAGS	:=	-L${MINILIBX} -lmlx -lX11 -lXext -lm
 
 # Makefile

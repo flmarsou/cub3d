@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 10:22:08 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:22:54 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@
 # define GROUND	'0'
 
 // MiniLibX - Window
-# define X_WIN				1280
-# define Y_WIN				720
+# define WIN_X				1280
+# define WIN_Y				720
 # define WIN_TITLE			"Cub3D - By flmarsou and rdedola"
 
 // MiniLibX - Events
@@ -61,7 +61,7 @@
 
 // MiniLibX - Masks
 # define NO_EVENT_MASK		0L
-# define KEY_PRESS_MASK		(1L<<0)
+# define KEY_PRESS_MASK		1L
 
 // MiniLibX - Keys
 # define KEY_ESC			65307
@@ -78,10 +78,8 @@
 
 struct	s_color
 {
-	char			*raw;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	char			*raw;			// Color string
+	unsigned int	hex_value;
 };
 
 struct s_file
@@ -103,10 +101,22 @@ struct s_file
 	unsigned int	height;			// Map Height
 };
 
+struct s_bg
+{
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+};
+
 struct s_mlx
 {
-	void			*mlx;
-	void			*win;
+	// MiniLibX
+	void			*mlx;			// MiniLibX pointer
+	void			*win;			// Window pointer
+	// Images
+	struct s_bg		bg;
 };
 
 typedef struct s_game
@@ -359,10 +369,16 @@ bool			error_map(const unsigned int error, const char c,
 //     MiniLibX                                                               //
 //============================================================================//
 
+//====================================//
+//     Init                           //
+//====================================//
+
+bool			init_window(t_game *game);
+
+void			init_background(t_game *game);
+
 void			game_loop(t_game *game);
-
 int				handle_keypress(int key, t_game *game);
-
 int				close_game(t_game *game);
 
 #endif
