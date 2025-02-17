@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/05 10:46:52 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/17 08:48:40 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static bool	check_closed(t_game *game)
 					|| game->file.map[y - 1][x] == EMPTY
 					|| game->file.map[y][x + 1] == EMPTY
 					|| game->file.map[y][x - 1] == EMPTY)
-				return (error_map(4, 0, x, y + 1));
+					return (error_map(4, 0, x, y + 1));
 			}
 			x++;
 		}
