@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:30:16 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 15:12:33 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:01:09 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static unsigned char	ft_atouc(char *str, const char key,
 	const unsigned int color)
 {
-	const char		*arr[] = {"red", "green", "blue"};
 	unsigned int	i;
 	unsigned int	value;
 
@@ -39,7 +38,7 @@ static unsigned char	get_blue(char *str, const char key)
 {
 	unsigned int	i;
 	unsigned int	j;
-	char			blue[3];
+	char			blue[4];
 
 	i = 0;
 	j = 0;
@@ -64,7 +63,7 @@ static unsigned char	get_green(char *str, const char key)
 {
 	unsigned int	i;
 	unsigned int	j;
-	char			green[3];
+	char			green[4];
 
 	i = 0;
 	j = 0;
@@ -85,7 +84,7 @@ static unsigned char	get_green(char *str, const char key)
 static unsigned char	get_red(char *str, const char key)
 {
 	unsigned int	i;
-	char			red[3];
+	char			red[4];
 
 	i = 0;
 	while (ft_isdigit(str[i]))
