@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 13:15:31 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:19:18 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,10 @@ typedef struct s_game
 	unsigned int	floor_hex;			// Color Hex (F)
 	unsigned int	ceiling_hex;		// Color Hex (C)
 	unsigned char	bit_flag;			// Key Registry
-
 	// Map
 	bool			player_found : 1;
 	char			facing : 7;			// Starting facing direction
 	unsigned int	height;				// Map Height
-
 	// Raycasting
 	double			pos_x;				// Player X position
 	double			pos_y;				// Player Y position

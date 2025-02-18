@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 13:14:20 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:19:21 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	handle_keypress(int key, t_main *main)
 		close_game(main->game, main->mlx);
 	else if (key == KEY_ARROW_LEFT)
 	{
-		
+
 	}
 	return (0);
 }
