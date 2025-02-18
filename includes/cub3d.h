@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 13:19:18 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:01:24 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ enum
 };
 
 // Map Characters
-# define N		'N'
-# define S		'S'
-# define W		'W'
-# define E		'E'
-# define EMPTY	' '
-# define WALL	'1'
-# define GROUND	'0'
+# define N					'N'
+# define S					'S'
+# define W					'W'
+# define E					'E'
+# define EMPTY				' '
+# define WALL				'1'
+# define GROUND				'0'
 
 // MiniLibX - Window
 # define WIN_X				1280
