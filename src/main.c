@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:52:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 15:29:24 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:57:24 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 static void	init_game_struct(t_game *game)
 {
-	unsigned int	i;
-
-	i = 0;
-	while (i < 6)
-		game->file.check_list[i++] = false;
+	game->file.bit_flag = 0;
 	game->file.map = NULL;
 	game->file.player_found = false;
 }

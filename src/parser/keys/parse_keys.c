@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 09:01:58 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 14:57:18 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:54:34 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ bool	check_list(t_game *game, bool check)
 	i = 0;
 	while (i < 6)
 	{
-		if (check && !game->file.check_list[i])
+		if (check && game->file.bit_flag != FLAG_ACCEPT)
 			return (error_keys(4, 0, 0));
-		if (!game->file.check_list[i])
+		if (game->file.bit_flag != FLAG_ACCEPT)
 			return (false);
 		i++;
 	}
@@ -50,19 +50,19 @@ bool	check_key(unsigned int key, char *str, unsigned int *len)
 
 bool	found_key(unsigned int key, t_game *game)
 {
-	if (key == NO && game->file.check_list[0] == false)
-		game->file.check_list[0] = true;
-	else if (key == SO && game->file.check_list[1] == false)
-		game->file.check_list[1] = true;
-	else if (key == WE && game->file.check_list[2] == false)
-		game->file.check_list[2] = true;
-	else if (key == EA && game->file.check_list[3] == false)
-		game->file.check_list[3] = true;
-	else if (key == F && game->file.check_list[4] == false)
-		game->file.check_list[4] = true;
-	else if (key == C && game->file.check_list[5] == false)
-		game->file.check_list[5] = true;
-	else if (key == NA_KEY)
+	if (key == FLAG_NO && !(game->file.bit_flag & FLAG_NO))
+		game->file.bit_flag |= FLAG_NO;
+	else if (key == FLAG_SO && !(game->file.bit_flag & FLAG_SO))
+		game->file.bit_flag |= FLAG_SO;
+	else if (key == FLAG_WE && !(game->file.bit_flag & FLAG_WE))
+		game->file.bit_flag |= FLAG_WE;
+	else if (key == FLAG_EA && !(game->file.bit_flag & FLAG_EA))
+		game->file.bit_flag |= FLAG_EA;
+	else if (key == FLAG_F && !(game->file.bit_flag & FLAG_F))
+		game->file.bit_flag |= FLAG_F;
+	else if (key == FLAG_C && !(game->file.bit_flag & FLAG_C))
+		game->file.bit_flag |= FLAG_C;
+	else if (key == 42)
 		return (true);
 	else
 		return (error_keys(2, 0, key));
@@ -74,22 +74,22 @@ unsigned int	is_key(char *line)
 	unsigned int	i;
 
 	if (!line || *line == '\n' || *line == '\0')
-		return (NA_KEY);
+		return (42);
 	i = 0;
 	if (ft_iskey(line[i]) && line[i + 1] && line[i + 2])
 	{
 		if (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-			return (NO);
+			return (FLAG_NO);
 		else if (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-			return (SO);
+			return (FLAG_SO);
 		else if (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' ')
-			return (WE);
+			return (FLAG_WE);
 		else if (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-			return (EA);
+			return (FLAG_EA);
 		else if (line[i] == 'F' && line[i + 1] == ' ')
-			return (F);
+			return (FLAG_F);
 		else if (line[i] == 'C' && line[i + 1] == ' ')
-			return (C);
+			return (FLAG_C);
 	}
 	return (0);
 }
