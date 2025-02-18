@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 10:57:20 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:49:58 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,7 @@ void			store_player_info(t_game *game, char *line,
 					unsigned int line_index);
 
 /**
- * @brief Validates the game map to ensure it meets the required constraints
+ * @brief Validates the game map to ensure it meets the required constraints.
  * 
  * 1. The top and bottom rows consist only of '1' or ' ' characters.
  * 2. The leftmost and rightmost characters of each row are '1' or ' '.
@@ -372,12 +372,32 @@ bool			error_map(const unsigned int error, const char c,
 //     Init                           //
 //====================================//
 
+/**
+ * @brief Initializes a sized window with a title and opens it.
+ * 
+ * @param game Pointer to the main structure.
+ */
 bool			init_window(t_game *game);
 
+/**
+ * @brief Creates the background image.
+ * 
+ * This function manually creates and stores a background image for later uses.
+ * Its size is `WIN_X` x `WIN_Y`, with the upper and lower halves colored
+ * according to `floor_hex (F Key)` and `ceiling_hex (C Key)`.
+ * 
+ * @param game Pointer to the main structure.
+ */
 void			init_background(t_game *game);
 
+//====================================//
+//     Game Loop                      //
+//====================================//
+
 void			game_loop(t_game *game);
+
 int				handle_keypress(int key, t_game *game);
+
 int				close_game(t_game *game);
 
 #endif
