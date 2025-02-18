@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 08:48:40 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:17:09 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@ static bool	check_closed(t_game *game)
 	unsigned int	y;
 
 	y = 1;
-	while (y <= game->file.height - 1)
+	while (y <= game->height - 1)
 	{
 		x = 1;
-		while (game->file.map[y][x + 1])
+		while (game->map[y][x + 1])
 		{
-			if (game->file.map[y][x] == GROUND
-				|| game->file.map[y][x] == 'N' || game->file.map[y][x] == 'S'
-				|| game->file.map[y][x] == 'W' || game->file.map[y][x] == 'E')
+			if (game->map[y][x] == GROUND
+				|| game->map[y][x] == 'N' || game->map[y][x] == 'S'
+				|| game->map[y][x] == 'W' || game->map[y][x] == 'E')
 			{
-				if (game->file.map[y + 1][x] == EMPTY
-					|| game->file.map[y - 1][x] == EMPTY
-					|| game->file.map[y][x + 1] == EMPTY
-					|| game->file.map[y][x - 1] == EMPTY)
+				if (game->map[y + 1][x] == EMPTY
+					|| game->map[y - 1][x] == EMPTY
+					|| game->map[y][x + 1] == EMPTY
+					|| game->map[y][x - 1] == EMPTY)
 					return (error_map(4, 0, x, y + 1));
 			}
 			x++;
@@ -48,12 +48,12 @@ static bool	check_sides(t_game *game)
 	unsigned int	y;
 
 	y = 0;
-	while (game->file.map[y])
+	while (game->map[y])
 	{
-		if ((game->file.map[y][0] != EMPTY
-			&& game->file.map[y][0] != WALL)
-			|| (game->file.map[y][ft_strlen(game->file.map[y]) - 1] != EMPTY
-			&& game->file.map[y][ft_strlen(game->file.map[y]) - 1] != WALL))
+		if ((game->map[y][0] != EMPTY
+			&& game->map[y][0] != WALL)
+			|| (game->map[y][ft_strlen(game->map[y]) - 1] != EMPTY
+			&& game->map[y][ft_strlen(game->map[y]) - 1] != WALL))
 			return (error_map(4, 0, 0, y));
 		y++;
 	}
@@ -67,17 +67,17 @@ static bool	check_top_bottom(t_game *game)
 	unsigned int	y;
 
 	x = 0;
-	while (game->file.map[0][x])
+	while (game->map[0][x])
 	{
-		if (game->file.map[0][x] != EMPTY && game->file.map[0][x] != WALL)
+		if (game->map[0][x] != EMPTY && game->map[0][x] != WALL)
 			return (error_map(4, 0, x, 0));
 		x++;
 	}
 	x = 0;
-	y = game->file.height;
-	while (game->file.map[y][x])
+	y = game->height;
+	while (game->map[y][x])
 	{
-		if (game->file.map[y][x] != EMPTY && game->file.map[y][x] != WALL)
+		if (game->map[y][x] != EMPTY && game->map[y][x] != WALL)
 			return (error_map(4, 0, x, y));
 		x++;
 	}

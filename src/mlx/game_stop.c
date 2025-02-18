@@ -6,23 +6,23 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:58:10 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 11:41:46 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:10:07 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	destroyer(t_game *game)
+static void	destroyer(t_mlx *mlx)
 {
-	if (game->mlx.win)
-		mlx_destroy_window(game->mlx.mlx, game->mlx.win);
-	if (game->mlx.bg.img)
-		mlx_destroy_image(game->mlx.mlx, game->mlx.bg.img);
+	if (mlx->win)
+		mlx_destroy_window(mlx->mlx, mlx->win);
+	if (mlx->bg.img)
+		mlx_destroy_image(mlx->mlx, mlx->bg.img);
 }
 
-int	close_game(t_game *game)
+int	close_game(t_game *game, t_mlx *mlx)
 {
-	destroyer(game);
+	destroyer(mlx);
 	free_game_struct(game);
 	printf(OK"Game closed!\n");
 	exit(0);

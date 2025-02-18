@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:30:16 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 10:49:56 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:16:36 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,12 @@ void	store_colors(t_game *game)
 	unsigned char	g;
 	unsigned char	b;
 
-	r = get_red(game->file.floor_raw, 'F');
-	g = get_green(game->file.floor_raw, 'F');
-	b = get_blue(game->file.floor_raw, 'F');
-	game->file.floor_hex = (int)r << 16 | (int)g << 8 | (int)b;
-	r = get_red(game->file.ceiling_raw, 'C');
-	g = get_green(game->file.ceiling_raw, 'C');
-	b = get_blue(game->file.ceiling_raw, 'C');
-	game->file.ceiling_hex = (int)r << 16 | (int)g << 8 | (int)b;
+	r = get_red(game->floor_raw, 'F');
+	g = get_green(game->floor_raw, 'F');
+	b = get_blue(game->floor_raw, 'F');
+	game->floor_hex = (int)r << 16 | (int)g << 8 | (int)b;
+	r = get_red(game->ceiling_raw, 'C');
+	g = get_green(game->ceiling_raw, 'C');
+	b = get_blue(game->ceiling_raw, 'C');
+	game->ceiling_hex = (int)r << 16 | (int)g << 8 | (int)b;
 }

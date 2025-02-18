@@ -6,13 +6,13 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:34:28 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 10:50:51 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:17:18 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	fill_ceiling(t_game *game, unsigned int *y)
+void	fill_ceiling(t_game game, t_mlx *mlx, unsigned int *y)
 {
 	unsigned int	x;
 	int				offset;
@@ -22,17 +22,17 @@ void	fill_ceiling(t_game *game, unsigned int *y)
 		x = 0;
 		while (x < WIN_X)
 		{
-			offset = ((*y) * game->mlx.bg.line_length + x
-					* (game->mlx.bg.bits_per_pixel / 8));
-			*(unsigned int *)(game->mlx.bg.addr + offset)
-				= game->file.ceiling_hex;
+			offset = ((*y) * mlx->bg.line_length + x
+					* (mlx->bg.bits_per_pixel / 8));
+			*(unsigned int *)(mlx->bg.addr + offset)
+				= game.ceiling_hex;
 			x++;
 		}
 		(*y)++;
 	}
 }
 
-void	fill_floor(t_game *game, unsigned int *y)
+void	fill_floor(t_game game, t_mlx *mlx, unsigned int *y)
 {
 	unsigned int	x;
 	int				offset;
@@ -42,27 +42,27 @@ void	fill_floor(t_game *game, unsigned int *y)
 		x = 0;
 		while (x < WIN_X)
 		{
-			offset = ((*y) * game->mlx.bg.line_length + x
-					* (game->mlx.bg.bits_per_pixel / 8));
-			*(unsigned int *)(game->mlx.bg.addr + offset)
-				= game->file.floor_hex;
+			offset = ((*y) * mlx->bg.line_length + x
+					* (mlx->bg.bits_per_pixel / 8));
+			*(unsigned int *)(mlx->bg.addr + offset)
+				= game.floor_hex;
 			x++;
 		}
 		(*y)++;
 	}
 }
 
-void	init_background(t_game *game)
+void	init_background(t_game game, t_mlx *mlx)
 {
 	unsigned int	y;
 
-	game->mlx.bg.img = mlx_new_image(game->mlx.mlx, WIN_X, WIN_Y);
-	game->mlx.bg.addr = mlx_get_data_addr(
-			game->mlx.bg.img,
-			&game->mlx.bg.bits_per_pixel,
-			&game->mlx.bg.line_length,
-			&game->mlx.bg.endian);
+	mlx->bg.img = mlx_new_image(mlx->mlx, WIN_X, WIN_Y);
+	mlx->bg.addr = mlx_get_data_addr(
+			mlx->bg.img,
+			&mlx->bg.bits_per_pixel,
+			&mlx->bg.line_length,
+			&mlx->bg.endian);
 	y = 0;
-	fill_ceiling(game, &y);
-	fill_floor(game, &y);
+	fill_ceiling(game, mlx, &y);
+	fill_floor(game, mlx, &y);
 }

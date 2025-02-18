@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 11:49:58 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:15:31 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>		// malloc, free
 # include <string.h>		// strerror, exit
 # include <stdbool.h>		// Booleans
+# include <math.h>
 
 //============================================================================//
 //     Defines                                                                //
@@ -79,26 +80,37 @@ enum
 //     Structs                                                                //
 //============================================================================//
 
-struct s_file
+//====================================//
+//     Parsing                        //
+//====================================//
+
+typedef struct s_game
 {
 	// Keys
-	char			*no_path;			// Path to north texture
-	char			*so_path;			// Path to south texture
-	char			*we_path;			// Path to west texture
-	char			*ea_path;			// Path to east texture
-	char			*floor_raw;
-	char			*ceiling_raw;
+	char			*no_path;			// Path to north texture (NO)
+	char			*so_path;			// Path to south texture (SO)
+	char			*we_path;			// Path to west texture (WE)
+	char			*ea_path;			// Path to east texture (EA)
+	char			*floor_raw;			// Color String (F)
+	char			*ceiling_raw;		// Color String (C)
 	char			**map;				// 2D Array to store the map
-	unsigned int	floor_hex;
-	unsigned int	ceiling_hex;
+	unsigned int	floor_hex;			// Color Hex (F)
+	unsigned int	ceiling_hex;		// Color Hex (C)
 	unsigned char	bit_flag;			// Key Registry
+
 	// Map
 	bool			player_found : 1;
 	char			facing : 7;			// Starting facing direction
-	unsigned int	pos_x;				// Player starting X pos
-	unsigned int	pos_y;				// Player starting Y pos
 	unsigned int	height;				// Map Height
-};
+
+	// Raycasting
+	double			pos_x;				// Player X position
+	double			pos_y;				// Player Y position
+}	t_game;
+
+//====================================//
+//     MiniLibX                       //
+//====================================//
 
 struct s_bg
 {
@@ -109,20 +121,20 @@ struct s_bg
 	int				endian;
 };
 
-struct s_mlx
+typedef struct s_mlx
 {
 	// MiniLibX
 	void			*mlx;			// MiniLibX pointer
 	void			*win;			// Window pointer
 	// Images
 	struct s_bg		bg;
-};
+}	t_mlx;
 
-typedef struct s_game
+typedef struct s_main
 {
-	struct s_file	file;
-	struct s_mlx	mlx;
-}	t_game;
+	t_game			*game;
+	t_mlx			*mlx;
+}	t_main;
 
 //============================================================================//
 //     Source                                                                 //
@@ -375,9 +387,9 @@ bool			error_map(const unsigned int error, const char c,
 /**
  * @brief Initializes a sized window with a title and opens it.
  * 
- * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
  */
-bool			init_window(t_game *game);
+bool			init_window(t_mlx *mlx);
 
 /**
  * @brief Creates the background image.
@@ -386,18 +398,16 @@ bool			init_window(t_game *game);
  * Its size is `WIN_X` x `WIN_Y`, with the upper and lower halves colored
  * according to `floor_hex (F Key)` and `ceiling_hex (C Key)`.
  * 
- * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
  */
-void			init_background(t_game *game);
+void			init_background(t_game game, t_mlx *mlx);
 
 //====================================//
 //     Game Loop                      //
 //====================================//
 
-void			game_loop(t_game *game);
+void			game_loop(t_game *game, t_mlx *mlx);
 
-int				handle_keypress(int key, t_game *game);
-
-int				close_game(t_game *game);
+int				close_game(t_game *game, t_mlx *mlx);
 
 #endif

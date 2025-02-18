@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/18 11:42:25 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/18 12:59:16 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,6 @@ SRC_PARSER	:=	parsing.c \
 SRC_MLX		:=	game_loop.c \
 				init_window.c \
 				init_background.c \
-				handle_keypress.c \
 				game_stop.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER} ${SRC_MLX}

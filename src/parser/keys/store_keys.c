@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:16:38 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 10:49:10 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:16:23 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,15 @@ void	store_key(unsigned int key, char *str, unsigned int len, t_game *game)
 	while (str[i] == ' ')
 		i++;
 	if (key == FLAG_NO)
-		game->file.no_path = ft_strndup(str + i, len);
+		game->no_path = ft_strndup(str + i, len);
 	else if (key == FLAG_SO)
-		game->file.so_path = ft_strndup(str + i, len);
+		game->so_path = ft_strndup(str + i, len);
 	else if (key == FLAG_WE)
-		game->file.we_path = ft_strndup(str + i, len);
+		game->we_path = ft_strndup(str + i, len);
 	else if (key == FLAG_EA)
-		game->file.ea_path = ft_strndup(str + i, len);
+		game->ea_path = ft_strndup(str + i, len);
 	else if (key == FLAG_F)
-		game->file.floor_raw = ft_strndup(str + i, len);
+		game->floor_raw = ft_strndup(str + i, len);
 	else if (key == FLAG_C)
-		game->file.ceiling_raw = ft_strndup(str + i, len);
+		game->ceiling_raw = ft_strndup(str + i, len);
 }
