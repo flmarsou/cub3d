@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/18 11:05:24 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/18 11:42:25 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@
 EXE			:=	cub3d
 
 # Files
-VPATH		:=	src : \
-				src/utils : \
+VPATH		:=	src \
+				src/utils \
 				src/parser : src/parser/args : src/parser/keys : src/parser/colors : src/parser/map \
 				src/mlx \
 
@@ -59,10 +59,12 @@ CFLAGS		:=  -Wall -Wextra -Iincludes -Iincludes/.MiniLibX -O2 -fsanitize=address
 LIBXFLAGS	:=	-L${MINILIBX} -lmlx -lX11 -lXext -lm
 
 # Makefile
-all:			${EXE}
+all:			init_submodules | ${EXE}
+
+init_submodules:
+				@git submodule update --init --recursive > /dev/null
 
 ${EXE}:			${OBJECTS}
-				@git submodule update --init --recursive
 				@${MAKE} -C ${MINILIBX} > /dev/null 2>&1
 				@${CC} ${CFLAGS} ${OBJECTS} ${LIBXFLAGS} -o ${EXE}
 
