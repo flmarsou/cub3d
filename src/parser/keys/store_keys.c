@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   store_key.c                                        :+:      :+:    :+:   */
+/*   store_keys.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:16:38 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 09:33:01 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:49:10 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ void	store_key(unsigned int key, char *str, unsigned int len, t_game *game)
 		i++;
 	while (str[i] == ' ')
 		i++;
-	if (key == NO)
+	if (key == FLAG_NO)
 		game->file.no_path = ft_strndup(str + i, len);
-	else if (key == SO)
+	else if (key == FLAG_SO)
 		game->file.so_path = ft_strndup(str + i, len);
-	else if (key == WE)
+	else if (key == FLAG_WE)
 		game->file.we_path = ft_strndup(str + i, len);
-	else if (key == EA)
+	else if (key == FLAG_EA)
 		game->file.ea_path = ft_strndup(str + i, len);
-	else if (key == F)
-		game->file.floor.raw = ft_strndup(str + i, len);
-	else if (key == C)
-		game->file.ceiling.raw = ft_strndup(str + i, len);
+	else if (key == FLAG_F)
+		game->file.floor_raw = ft_strndup(str + i, len);
+	else if (key == FLAG_C)
+		game->file.ceiling_raw = ft_strndup(str + i, len);
 }

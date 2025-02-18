@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:34:28 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 15:50:36 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:50:51 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	fill_ceiling(t_game *game, unsigned int *y)
 			offset = ((*y) * game->mlx.bg.line_length + x
 					* (game->mlx.bg.bits_per_pixel / 8));
 			*(unsigned int *)(game->mlx.bg.addr + offset)
-				= game->file.ceiling.hex_value;
+				= game->file.ceiling_hex;
 			x++;
 		}
 		(*y)++;
@@ -45,7 +45,7 @@ void	fill_floor(t_game *game, unsigned int *y)
 			offset = ((*y) * game->mlx.bg.line_length + x
 					* (game->mlx.bg.bits_per_pixel / 8));
 			*(unsigned int *)(game->mlx.bg.addr + offset)
-				= game->file.floor.hex_value;
+				= game->file.floor_hex;
 			x++;
 		}
 		(*y)++;

@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:56:52 by flmarsou          #+#    #+#             */
-/*   Updated: 2024/12/20 15:06:44 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:49:18 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ bool	check_format(char *str, const char key)
 
 bool	parse_colors(t_game *game)
 {
-	if (!check_format(game->file.floor.raw, 'F'))
+	if (!check_format(game->file.floor_raw, 'F'))
 		return (false);
-	if (!check_format(game->file.ceiling.raw, 'C'))
+	if (!check_format(game->file.ceiling_raw, 'C'))
 		return (false);
 	store_colors(game);
 	return (true);

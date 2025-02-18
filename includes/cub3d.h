@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 14:22:54 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:57:20 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "ansi.h"			// ANSI Defines
-# include "mlx.h"	// MiniLibX
+# include "mlx.h"			// MiniLibX
 
 # include <fcntl.h>			// open
 # include <unistd.h>		// close, read, write
@@ -33,13 +33,16 @@
 # define OK		"\e[38;2;25;159;54m\e[1m[o] - Success: \e[38;2;255;255;255m"
 
 // Keys
-# define NO		1
-# define SO		2
-# define WE		3
-# define EA		4
-# define F		5
-# define C		6
-# define NA_KEY	7
+enum
+{
+	FLAG_NO		= (1 << 0),
+	FLAG_SO		= (1 << 1),
+	FLAG_WE		= (1 << 2),
+	FLAG_EA		= (1 << 3),
+	FLAG_F		= (1 << 4),
+	FLAG_C		= (1 << 5),
+	FLAG_ACCEPT	= (FLAG_NO | FLAG_SO | FLAG_WE | FLAG_EA | FLAG_F | FLAG_C)
+};
 
 // Map Characters
 # define N		'N'
@@ -76,29 +79,25 @@
 //     Structs                                                                //
 //============================================================================//
 
-struct	s_color
-{
-	char			*raw;			// Color string
-	unsigned int	hex_value;
-};
-
 struct s_file
 {
 	// Keys
-	char			*no_path;		// Path to north texture
-	char			*so_path;		// Path to south texture
-	char			*we_path;		// Path to west texture
-	char			*ea_path;		// Path to east texture
-	struct s_color	floor;			// Floor colors
-	struct s_color	ceiling;		// Ceiling colors
-	bool			check_list[6];	// Key Registry
+	char			*no_path;			// Path to north texture
+	char			*so_path;			// Path to south texture
+	char			*we_path;			// Path to west texture
+	char			*ea_path;			// Path to east texture
+	char			*floor_raw;
+	char			*ceiling_raw;
+	char			**map;				// 2D Array to store the map
+	unsigned int	floor_hex;
+	unsigned int	ceiling_hex;
+	unsigned char	bit_flag;			// Key Registry
 	// Map
-	char			**map;			// 2D Array to store the map
-	bool			player_found;
-	char			facing;			// Starting facing direction
-	unsigned int	pos_x;			// Player starting X pos
-	unsigned int	pos_y;			// Player starting Y pos
-	unsigned int	height;			// Map Height
+	bool			player_found : 1;
+	char			facing : 7;			// Starting facing direction
+	unsigned int	pos_x;				// Player starting X pos
+	unsigned int	pos_y;				// Player starting Y pos
+	unsigned int	height;				// Map Height
 };
 
 struct s_bg

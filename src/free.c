@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 08:45:23 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/17 09:16:53 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 10:49:02 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	free_game_struct(t_game *game)
 		free(game->file.we_path);
 	if (game->file.ea_path)
 		free(game->file.ea_path);
-	if (game->file.floor.raw)
-		free(game->file.floor.raw);
-	if (game->file.ceiling.raw)
-		free(game->file.ceiling.raw);
+	if (game->file.floor_raw)
+		free(game->file.floor_raw);
+	if (game->file.ceiling_raw)
+		free(game->file.ceiling_raw);
 	if (game->file.map)
 	{
 		while (game->file.map[i])
