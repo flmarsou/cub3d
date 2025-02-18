@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/17 13:46:47 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/18 11:05:24 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,13 +55,14 @@ MINILIBX	:=	includes/.MiniLibX
 
 # Variables
 CC			:=	cc
-CFLAGS		:=  -Wall -Wextra -Iincludes -Iincludes/.MiniLibX -O2 #-fsanitize=address -g
+CFLAGS		:=  -Wall -Wextra -Iincludes -Iincludes/.MiniLibX -O2 -fsanitize=address -g
 LIBXFLAGS	:=	-L${MINILIBX} -lmlx -lX11 -lXext -lm
 
 # Makefile
 all:			${EXE}
 
 ${EXE}:			${OBJECTS}
+				@git submodule update --init --recursive
 				@${MAKE} -C ${MINILIBX} > /dev/null 2>&1
 				@${CC} ${CFLAGS} ${OBJECTS} ${LIBXFLAGS} -o ${EXE}
 
