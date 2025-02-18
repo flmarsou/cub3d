@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:10:50 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 13:16:53 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:50:41 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ void	store_player_info(t_game *game, char *line, unsigned int line_index)
 	{
 		if (line[i] == N || line[i] == S || line[i] == W || line[i] == E)
 		{
-			game->pos_x = i;
-			game->pos_y = line_index;
+			game->pos_x = (double)i;
+			game->pos_y = (double)line_index;
 			game->facing = line[i];
 		}
 		i++;
