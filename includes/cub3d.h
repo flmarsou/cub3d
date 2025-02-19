@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 15:01:24 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:19:54 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ enum
 
 typedef struct s_game
 {
-	// Keys
+	// Map
 	char			*no_path;			// Path to north texture (NO)
 	char			*so_path;			// Path to south texture (SO)
 	char			*we_path;			// Path to west texture (WE)
@@ -97,26 +97,26 @@ typedef struct s_game
 	unsigned int	floor_hex;			// Color Hex (F)
 	unsigned int	ceiling_hex;		// Color Hex (C)
 	unsigned char	bit_flag;			// Key Registry
-	// Map
 	bool			player_found : 1;
 	char			facing : 7;			// Starting facing direction
 	unsigned int	height;				// Map Height
 	// Raycasting
-	double			pos_x;				// Player X position
-	double			pos_y;				// Player Y position
+	float			pos_x;				// Player X position
+	float			pos_y;				// Player Y position
+	float			dir_x;
+	float			dir_y;
+	float			plane_x;
+	float			plane_y;
 }	t_game;
 
 //====================================//
 //     MiniLibX                       //
 //====================================//
 
-struct s_bg
+struct s_image
 {
 	void			*img;
-	char			*addr;
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
+	int				*img_data;
 };
 
 typedef struct s_mlx
@@ -125,14 +125,14 @@ typedef struct s_mlx
 	void			*mlx;			// MiniLibX pointer
 	void			*win;			// Window pointer
 	// Images
-	struct s_bg		bg;
+	struct s_image	image;
 }	t_mlx;
 
-typedef struct s_main
+typedef struct s_data
 {
 	t_game			*game;
 	t_mlx			*mlx;
-}	t_main;
+}	t_data;
 
 //============================================================================//
 //     Source                                                                 //
@@ -389,16 +389,16 @@ bool			error_map(const unsigned int error, const char c,
  */
 bool			init_window(t_mlx *mlx);
 
-/**
- * @brief Creates the background image.
- * 
- * This function manually creates and stores a background image for later uses.
- * Its size is `WIN_X` x `WIN_Y`, with the upper and lower halves colored
- * according to `floor_hex (F Key)` and `ceiling_hex (C Key)`.
- * 
- * @param mlx Pointer to the mlx structure.
- */
-void			init_background(t_game game, t_mlx *mlx);
+///**
+// * @brief Creates the background image.
+// * 
+// * This function manually creates and stores a background image for later uses.
+// * Its size is `WIN_X` x `WIN_Y`, with the upper and lower halves colored
+// * according to `floor_hex (F Key)` and `ceiling_hex (C Key)`.
+// * 
+// * @param mlx Pointer to the mlx structure.
+// */
+//void			init_background(t_game game, t_mlx *mlx);
 
 //====================================//
 //     Game Loop                      //
@@ -406,6 +406,8 @@ void			init_background(t_game game, t_mlx *mlx);
 
 void			game_loop(t_game *game, t_mlx *mlx);
 
-int				close_game(t_game *game, t_mlx *mlx);
+void			raycasting(t_data *data);
+
+int				close_game(t_data *data);
 
 #endif
