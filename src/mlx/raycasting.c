@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:53:10 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/19 15:18:58 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:31:15 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ static void	cast_ray(t_game *game, t_mlx *mlx, unsigned int x)
 	//printf("color: %X\n", color);
 
 	//
-	// Step 6
+	// Step 6: TODO, fill image instead of put pixels
 	//
 	unsigned int	y = 0;
 

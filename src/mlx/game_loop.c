@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/19 15:26:09 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/19 15:31:30 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,14 @@ static int	handle_keypress(int key, t_data *data)
 		data->game->pos_y += 0.1f;
 	else
 		return (0);
-	printf("Player Pos -> X: %f Y: %f\n", data->game->pos_x, data->game->pos_y);
-	printf("Player Dir -> X: %f\n", data->game->dir_x);
-	raycasting(data);
+	//printf("Player Pos -> X: %f Y: %f\n", data->game->pos_x, data->game->pos_y);
+	//printf("Player Dir -> X: %f\n", data->game->dir_x);
+	raycasting(data); // TODO: Add background into image
 	return (0);
 }
 
 void	game_loop(t_game *game, t_mlx *mlx)
 {
-	mlx->image.img = mlx_new_image(mlx->mlx, WIN_X, WIN_Y);
-
 	game->dir_x = 0;
 	game->dir_y = 0;
 	game->plane_x = 0;
