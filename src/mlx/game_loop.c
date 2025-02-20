@@ -6,43 +6,50 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/19 15:31:30 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:47:33 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	render(t_game *game, t_mlx *mlx)
+{
+	mlx_clear_window(mlx->mlx, mlx->win);
+	background(*game, mlx);
+	raycasting(game, mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
+}
 
 static int	handle_keypress(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 		close_game(data);
 	else if (key == KEY_ARROW_LEFT)
-		data->game->dir_x -= 0.1f;
+		rotate(data->game, ROT_SPEED);
 	else if (key == KEY_ARROW_RIGHT)
-		data->game->dir_x += 0.1f;
+		rotate(data->game, -ROT_SPEED);
 	else if (key == KEY_W)
-		data->game->pos_x += 0.1f;
+		move(data->game, KEY_W);
 	else if (key == KEY_S)
-		data->game->pos_x -= 0.1f;
+		move(data->game, KEY_S);
 	else if (key == KEY_A)
-		data->game->pos_y -= 0.1f;
+		strafe(data->game, KEY_A);
 	else if (key == KEY_D)
-		data->game->pos_y += 0.1f;
+		strafe(data->game, KEY_D);
 	else
 		return (0);
-	//printf("Player Pos -> X: %f Y: %f\n", data->game->pos_x, data->game->pos_y);
-	//printf("Player Dir -> X: %f\n", data->game->dir_x);
-	raycasting(data); // TODO: Add background into image
+	render(data->game, data->mlx);
 	return (0);
 }
 
 void	game_loop(t_game *game, t_mlx *mlx)
 {
-	game->dir_x = 0;
+	game->dir_x = -1;
 	game->dir_y = 0;
 	game->plane_x = 0;
 	game->plane_y = 0.66f;
-	mlx_hook(mlx->win, KEY_PRESS, KEY_PRESS_MASK, handle_keypress, &(t_data){game, mlx});
-	mlx_hook(mlx->win, DESTROY_NOTIFY, NO_EVENT_MASK, close_game, &(t_data){game, mlx});
+	init_image(mlx);
+	mlx_hook(mlx->win, 2, 1L, handle_keypress, &(t_data){game, mlx});
+	mlx_hook(mlx->win, 17, 0L, close_game, &(t_data){game, mlx});
 	mlx_loop(mlx->mlx);
 }
