@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/19 13:19:54 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:54:31 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,6 @@ enum
 # define WIN_Y				720
 # define WIN_TITLE			"Cub3D - By flmarsou and rdedola"
 
-// MiniLibX - Events
-# define KEY_PRESS			2
-# define DESTROY_NOTIFY		17
-
-// MiniLibX - Masks
-# define NO_EVENT_MASK		0L
-# define KEY_PRESS_MASK		1L
-
 // MiniLibX - Keys
 # define KEY_ESC			65307
 # define KEY_ARROW_LEFT		65361
@@ -75,6 +67,10 @@ enum
 # define KEY_A				97
 # define KEY_S				115
 # define KEY_D				100
+
+// Stats
+# define MOVE_SPEED			0.1f
+# define ROT_SPEED			0.1f
 
 //============================================================================//
 //     Structs                                                                //
@@ -86,7 +82,7 @@ enum
 
 typedef struct s_game
 {
-	// Map
+	// Map & Parsing
 	char			*no_path;			// Path to north texture (NO)
 	char			*so_path;			// Path to south texture (SO)
 	char			*we_path;			// Path to west texture (WE)
@@ -97,16 +93,31 @@ typedef struct s_game
 	unsigned int	floor_hex;			// Color Hex (F)
 	unsigned int	ceiling_hex;		// Color Hex (C)
 	unsigned char	bit_flag;			// Key Registry
-	bool			player_found : 1;
+	bool			player_found : 1;	// Flag bool for player detection
 	char			facing : 7;			// Starting facing direction
 	unsigned int	height;				// Map Height
 	// Raycasting
 	float			pos_x;				// Player X position
 	float			pos_y;				// Player Y position
-	float			dir_x;
-	float			dir_y;
-	float			plane_x;
-	float			plane_y;
+	int				map_x;				// Player X grid cell
+	int				map_y;				// Player Y grid cell
+	float			dir_x;				// Camera X direction
+	float			dir_y;				// Camera Y direction
+	float			plane_x;			// Camera X plane
+	float			plane_y;			// Camera Y plane
+	float			camera_x;			// Camera X position
+	float			ray_dir_x;			// X direction of the ray
+	float			ray_dir_y;			// Y direction of the ray
+	float			delta_dist_x;		// Distance the ray moves in X direction
+	float			delta_dist_y;		// Distance the ray moves in Y direction
+	float			side_dist_x;		// Distance to the next X grid line
+	float			side_dist_y;		// Distance to the next Y grid line
+	int				step_x;				// Value for moving in the X direction
+	int				step_y;				// Value for moving in the Y direction
+	int				side;				// Horizontal or Vertical ray hit
+	float			perp_wall_dist;		// Player-Wall perpendicular distance
+	int				draw_start;			// Top of the wall
+	int				draw_end;			// Bottom of the wall
 }	t_game;
 
 //====================================//
@@ -115,19 +126,21 @@ typedef struct s_game
 
 struct s_image
 {
-	void			*img;
-	int				*img_data;
+	void			*img;			// Image pointer
+	char			*addr;			// Image data
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
 };
 
 typedef struct s_mlx
 {
-	// MiniLibX
 	void			*mlx;			// MiniLibX pointer
 	void			*win;			// Window pointer
-	// Images
 	struct s_image	image;
 }	t_mlx;
 
+// Struct for passing both t_game and t_mlx
 typedef struct s_data
 {
 	t_game			*game;
@@ -389,16 +402,14 @@ bool			error_map(const unsigned int error, const char c,
  */
 bool			init_window(t_mlx *mlx);
 
-///**
-// * @brief Creates the background image.
-// * 
-// * This function manually creates and stores a background image for later uses.
-// * Its size is `WIN_X` x `WIN_Y`, with the upper and lower halves colored
-// * according to `floor_hex (F Key)` and `ceiling_hex (C Key)`.
-// * 
-// * @param mlx Pointer to the mlx structure.
-// */
-//void			init_background(t_game game, t_mlx *mlx);
+/**
+ * @brief Initializes the image buffer.
+ * 
+ * This function creates an `WIN_X` x `WIN_Y` sized image buffer for later uses.
+ * 
+ * @param mlx Pointer to the mlx structure.
+ */
+void			init_image(t_mlx *mlx);
 
 //====================================//
 //     Game Loop                      //
@@ -406,7 +417,12 @@ bool			init_window(t_mlx *mlx);
 
 void			game_loop(t_game *game, t_mlx *mlx);
 
-void			raycasting(t_data *data);
+void			background(t_game game, t_mlx *mlx);
+void			raycasting(t_game *game, t_mlx *mlx);
+
+void			rotate(t_game *game, float speed);
+void			move(t_game *game, int key);
+void			strafe(t_game *game, int key);
 
 int				close_game(t_data *data);
 

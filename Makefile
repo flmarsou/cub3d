@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/19 12:01:49 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/20 14:57:34 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,10 @@ SRC_PARSER	:=	parsing.c \
 
 SRC_MLX		:=	game_loop.c \
 				init_window.c \
+				init_image.c \
+				background.c \
 				raycasting.c \
+				movement.c \
 				game_stop.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER} ${SRC_MLX}
