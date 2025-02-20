@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:52:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 15:00:16 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:42:04 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ int	main(int argc, char **argv)
 	t_game	game;
 	t_mlx	mlx;
 
-	if (!parsing(argc, argv, &game) || !init_window(&mlx))
+	if (!parsing(argc, argv, &game))
+	{
+		free_game_struct(&game);
+		return (1);
+	}
+	if (!init_window(&mlx))
 	{
 		free_game_struct(&game);
 		return (1);
