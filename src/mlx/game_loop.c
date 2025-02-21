@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/20 14:47:33 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:58:34 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	render(t_game *game, t_mlx *mlx)
 	mlx_clear_window(mlx->mlx, mlx->win);
 	background(*game, mlx);
 	raycasting(game, mlx);
+	minimap(*game, mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
 }
 

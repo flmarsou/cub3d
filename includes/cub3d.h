@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/20 14:54:31 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:57:12 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -419,6 +419,7 @@ void			game_loop(t_game *game, t_mlx *mlx);
 
 void			background(t_game game, t_mlx *mlx);
 void			raycasting(t_game *game, t_mlx *mlx);
+void			minimap(t_game game, t_mlx *mlx);
 
 void			rotate(t_game *game, float speed);
 void			move(t_game *game, int key);

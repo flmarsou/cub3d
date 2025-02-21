@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/20 14:57:34 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/21 10:46:52 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_MLX		:=	game_loop.c \
 				init_image.c \
 				background.c \
 				raycasting.c \
+				minimap.c \
 				movement.c \
 				game_stop.c \
 
