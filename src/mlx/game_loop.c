@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/24 12:55:12 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:32:30 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,75 @@ static void	render(t_game *game, t_mlx *mlx)
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
 }
 
-static int	handle_keypress(int key, t_data *data)
+static int	keypress(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 		close_game(data);
-	else if (key == KEY_ARROW_LEFT)
+	if (key == KEY_ARROW_LEFT)
+		data->mlx->key_pressed[0] = true;
+	if (key == KEY_ARROW_RIGHT)
+		data->mlx->key_pressed[1] = true;
+	if (key == KEY_W)
+		data->mlx->key_pressed[2] = true;
+	if (key == KEY_A)
+		data->mlx->key_pressed[3] = true;
+	if (key == KEY_S)
+		data->mlx->key_pressed[4] = true;
+	if (key == KEY_D)
+		data->mlx->key_pressed[5] = true;
+	return (0);
+}
+
+static int	keyrelease(int key, t_data *data)
+{
+	if (key == KEY_ARROW_LEFT)
+		data->mlx->key_pressed[0] = false;
+	if (key == KEY_ARROW_RIGHT)
+		data->mlx->key_pressed[1] = false;
+	if (key == KEY_W)
+		data->mlx->key_pressed[2] = false;
+	if (key == KEY_A)
+		data->mlx->key_pressed[3] = false;
+	if (key == KEY_S)
+		data->mlx->key_pressed[4] = false;
+	if (key == KEY_D)
+		data->mlx->key_pressed[5] = false;
+	return (0);
+}
+
+static int	loop(t_data *data)
+{
+	if (data->mlx->key_pressed[0])
 		rotate(data->game, ROT_SPEED);
-	else if (key == KEY_ARROW_RIGHT)
+	if (data->mlx->key_pressed[1])
 		rotate(data->game, -ROT_SPEED);
-	else if (key == KEY_W)
+	if (data->mlx->key_pressed[2])
 		move(data->game, KEY_W);
-	else if (key == KEY_S)
-		move(data->game, KEY_S);
-	else if (key == KEY_A)
+	if (data->mlx->key_pressed[3])
 		strafe(data->game, KEY_A);
-	else if (key == KEY_D)
+	if (data->mlx->key_pressed[4])
+		move(data->game, KEY_S);
+	if (data->mlx->key_pressed[5])
 		strafe(data->game, KEY_D);
-	else
-		return (-1);
 	render(data->game, data->mlx);
 	return (0);
 }
 
 void	game_loop(t_game *game, t_mlx *mlx)
 {
+	t_data	data;
+
+	data.game = game;
+	data.mlx = mlx;
+
 	game->dir_x = -1;
 	game->dir_y = 0;
 	game->plane_x = 0;
-	game->plane_y = 0.66f;
+	game->plane_y = 1;
 	init_image(mlx);
-	mlx_hook(mlx->win, 2, 1L, handle_keypress, &(t_data){game, mlx});
-	mlx_hook(mlx->win, 17, 0L, close_game, &(t_data){game, mlx});
+	mlx_hook(mlx->win, 2, 1L, keypress, &data);
+	mlx_hook(mlx->win, 3, 2L, keyrelease, &data);
+	mlx_loop_hook(mlx->mlx, loop, &data);
+	mlx_hook(mlx->win, 17, 0L, close_game, &data);
 	mlx_loop(mlx->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/24 12:45:28 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:35:26 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ enum
 # define KEY_D				100
 
 // Stats
-# define MOVE_SPEED			0.1f
-# define ROT_SPEED			0.1f
+# define MOVE_SPEED			0.01f
+# define ROT_SPEED			0.006f
 # define MINIMAP_SIZE		21
 # define CELL_SIZE			10
 
@@ -95,8 +95,8 @@ typedef struct s_game
 	unsigned int	floor_hex;			// Color Hex (F)
 	unsigned int	ceiling_hex;		// Color Hex (C)
 	unsigned char	bit_flag;			// Key Registry
-	bool			player_found : 1;	// Flag bool for player detection
-	char			facing : 7;			// Starting facing direction
+	bool			player_found;		// Flag bool for player detection
+	char			facing;				// Starting facing direction
 	unsigned int	height;				// Map Height
 	// Raycasting
 	float			pos_x;				// Player X position
@@ -140,6 +140,7 @@ typedef struct s_mlx
 	void			*mlx;			// MiniLibX pointer
 	void			*win;			// Window pointer
 	struct s_image	image;
+	bool			key_pressed[6];
 }	t_mlx;
 
 // Struct for passing both t_game and t_mlx
