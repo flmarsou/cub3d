@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:29:03 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/20 14:46:45 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:08:05 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,17 @@ void	move(t_game *game, int key)
 {
 	if (key == KEY_W)
 	{
-		game->pos_x += game->dir_x * MOVE_SPEED;
-		game->pos_y += game->dir_y * MOVE_SPEED;
+		if (game->map[(int)game->pos_y][(int)(game->pos_x + game->dir_x * MOVE_SPEED)] != '1')
+			game->pos_x += game->dir_x * MOVE_SPEED;
+		if (game->map[(int)(game->pos_y + game->dir_y * MOVE_SPEED)][(int)game->pos_x] != '1')
+			game->pos_y += game->dir_y * MOVE_SPEED;
 	}
 	else if (key == KEY_S)
 	{
-		game->pos_x -= game->dir_x * MOVE_SPEED;
-		game->pos_y -= game->dir_y * MOVE_SPEED;
+		if (game->map[(int)game->pos_y][(int)(game->pos_x - game->dir_x * MOVE_SPEED)] != '1')
+			game->pos_x -= game->dir_x * MOVE_SPEED;
+		if (game->map[(int)(game->pos_y - game->dir_y * MOVE_SPEED)][(int)game->pos_x] != '1')
+			game->pos_y -= game->dir_y * MOVE_SPEED;
 	}
 }
 
@@ -41,12 +45,16 @@ void	strafe(t_game *game, int key)
 {
 	if (key == KEY_A)
 	{
-		game->pos_x -= game->plane_x * MOVE_SPEED;
-		game->pos_y -= game->plane_y * MOVE_SPEED;
+		if (game->map[(int)game->pos_y][(int)(game->pos_x - game->plane_x * MOVE_SPEED)] != '1')
+			game->pos_x -= game->plane_x * MOVE_SPEED;
+		if (game->map[(int)(game->pos_y - game->plane_y * MOVE_SPEED)][(int)game->pos_x] != '1')
+			game->pos_y -= game->plane_y * MOVE_SPEED;
 	}
 	else if (key == KEY_D)
 	{
-		game->pos_x += game->plane_x * MOVE_SPEED;
+		if (game->map[(int)game->pos_y][(int)(game->pos_x + game->plane_x * MOVE_SPEED)] != '1')
+			game->pos_x += game->plane_x * MOVE_SPEED;
+		if (game->map[(int)(game->pos_y + game->plane_y * MOVE_SPEED)][(int)game->pos_x] != '1')
 		game->pos_y += game->plane_y * MOVE_SPEED;
 	}
 }
