@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/21 10:46:52 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/24 11:04:44 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ EXE			:=	cub3d
 VPATH		:=	src \
 				src/utils \
 				src/parser : src/parser/args : src/parser/keys : src/parser/colors : src/parser/map \
-				src/mlx \
+				src/mlx	: src/mlx/graphics : src/mlx/utils \
 
 SRC			:=	main.c \
 				free.c \

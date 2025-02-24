@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/21 10:57:12 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:45:28 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ enum
 // Stats
 # define MOVE_SPEED			0.1f
 # define ROT_SPEED			0.1f
+# define MINIMAP_SIZE		21
+# define CELL_SIZE			10
 
 //============================================================================//
 //     Structs                                                                //

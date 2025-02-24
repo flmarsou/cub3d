@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/21 11:58:34 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:55:12 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	handle_keypress(int key, t_data *data)
 	else if (key == KEY_D)
 		strafe(data->game, KEY_D);
 	else
-		return (0);
+		return (-1);
 	render(data->game, data->mlx);
 	return (0);
 }
