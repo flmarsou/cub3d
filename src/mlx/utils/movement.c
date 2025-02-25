@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:29:03 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/25 13:33:44 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:32:56 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ float	get_speed(t_mlx *mlx)
 
 	if (mlx->key_pressed[6])
 		is_running = 2;
+	else if (mlx->key_pressed[8])
+		is_running = 0.33f;
 	else
 		is_running = 1;
 	if ((mlx->key_pressed[2] && mlx->key_pressed[3])

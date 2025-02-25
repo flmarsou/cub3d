@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/25 13:12:39 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:27:41 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ enum
 # define KEY_A				97
 # define KEY_S				115
 # define KEY_D				100
-# define SHIFT				65505
+# define KEY_LEFT_SHIFT		65505
 # define KEY_M				109
+# define KEY_LEFT_CTRL		65507
 
 // Stats
 # define MOVE_SPEED			0.01f
@@ -144,7 +145,7 @@ typedef struct s_mlx
 	void			*mlx;			// MiniLibX pointer
 	void			*win;			// Window pointer
 	struct s_image	image;
-	bool			key_pressed[8];
+	bool			key_pressed[9];
 }	t_mlx;
 
 // Struct for passing both t_game and t_mlx

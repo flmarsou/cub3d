@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/25 12:07:09 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:31:41 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,14 @@ static int	keypress(int key, t_data *data)
 		data->mlx->key_pressed[4] = true;
 	if (key == KEY_D)
 		data->mlx->key_pressed[5] = true;
-	if (key == SHIFT)
+	if (key == KEY_LEFT_SHIFT)
 		data->mlx->key_pressed[6] = true;
 	if (key == KEY_M && !data->mlx->key_pressed[7])
 		data->mlx->key_pressed[7] = true;
 	else if (key == KEY_M && data->mlx->key_pressed[7])
 		data->mlx->key_pressed[7] = false;
+	if (key == KEY_LEFT_CTRL)
+		data->mlx->key_pressed[8] = true;
 	return (0);
 }
 
@@ -61,8 +63,10 @@ static int	keyrelease(int key, t_data *data)
 		data->mlx->key_pressed[4] = false;
 	if (key == KEY_D)
 		data->mlx->key_pressed[5] = false;
-	if (key == SHIFT)
+	if (key == KEY_LEFT_SHIFT)
 		data->mlx->key_pressed[6] = false;
+	if (key == KEY_LEFT_CTRL)
+		data->mlx->key_pressed[8] = false;
 	return (0);
 }
 
@@ -96,7 +100,7 @@ void	game_loop(t_game *game, t_mlx *mlx)
 	game->dir_x = -1;
 	game->dir_y = 0;
 	game->plane_x = 0;
-	game->plane_y = 1;
+	game->plane_y = 0.66f;
 	game->speed_multiplier = 0;
 	mlx->key_pressed[0] = false;
 	mlx->key_pressed[1] = false;
@@ -106,6 +110,7 @@ void	game_loop(t_game *game, t_mlx *mlx)
 	mlx->key_pressed[5] = false;
 	mlx->key_pressed[6] = false;
 	mlx->key_pressed[7] = false;
+	mlx->key_pressed[8] = false;
 	init_image(mlx);
 	mlx_hook(mlx->win, 2, 1L, keypress, &data);
 	mlx_hook(mlx->win, 3, 2L, keyrelease, &data);
