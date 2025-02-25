@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/24 15:35:26 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:12:39 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ enum
 # define KEY_A				97
 # define KEY_S				115
 # define KEY_D				100
+# define SHIFT				65505
+# define KEY_M				109
 
 // Stats
 # define MOVE_SPEED			0.01f
@@ -120,6 +122,8 @@ typedef struct s_game
 	float			perp_wall_dist;		// Player-Wall perpendicular distance
 	int				draw_start;			// Top of the wall
 	int				draw_end;			// Bottom of the wall
+	float			speed;				// Current speed
+	float			speed_multiplier;	// Running and diagonal speed
 }	t_game;
 
 //====================================//
@@ -140,7 +144,7 @@ typedef struct s_mlx
 	void			*mlx;			// MiniLibX pointer
 	void			*win;			// Window pointer
 	struct s_image	image;
-	bool			key_pressed[6];
+	bool			key_pressed[8];
 }	t_mlx;
 
 // Struct for passing both t_game and t_mlx
@@ -424,9 +428,10 @@ void			background(t_game game, t_mlx *mlx);
 void			raycasting(t_game *game, t_mlx *mlx);
 void			minimap(t_game game, t_mlx *mlx);
 
+float			get_speed(t_mlx *mlx);
 void			rotate(t_game *game, float speed);
-void			move(t_game *game, int key);
-void			strafe(t_game *game, int key);
+void			move(t_game *game, int key, float speed);
+void			strafe(t_game *game, int key, float speed);
 
 int				close_game(t_data *data);
 

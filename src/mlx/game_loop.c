@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/24 15:32:30 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/25 12:07:09 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	render(t_game *game, t_mlx *mlx)
 	mlx_clear_window(mlx->mlx, mlx->win);
 	background(*game, mlx);
 	raycasting(game, mlx);
-	minimap(*game, mlx);
+	if (mlx->key_pressed[7])
+		minimap(*game, mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
 }
 
@@ -37,6 +38,12 @@ static int	keypress(int key, t_data *data)
 		data->mlx->key_pressed[4] = true;
 	if (key == KEY_D)
 		data->mlx->key_pressed[5] = true;
+	if (key == SHIFT)
+		data->mlx->key_pressed[6] = true;
+	if (key == KEY_M && !data->mlx->key_pressed[7])
+		data->mlx->key_pressed[7] = true;
+	else if (key == KEY_M && data->mlx->key_pressed[7])
+		data->mlx->key_pressed[7] = false;
 	return (0);
 }
 
@@ -54,23 +61,28 @@ static int	keyrelease(int key, t_data *data)
 		data->mlx->key_pressed[4] = false;
 	if (key == KEY_D)
 		data->mlx->key_pressed[5] = false;
+	if (key == SHIFT)
+		data->mlx->key_pressed[6] = false;
 	return (0);
 }
 
 static int	loop(t_data *data)
 {
+	float	speed;
+
+	speed = get_speed(data->mlx);
 	if (data->mlx->key_pressed[0])
 		rotate(data->game, ROT_SPEED);
 	if (data->mlx->key_pressed[1])
 		rotate(data->game, -ROT_SPEED);
 	if (data->mlx->key_pressed[2])
-		move(data->game, KEY_W);
+		move(data->game, KEY_W, speed);
 	if (data->mlx->key_pressed[3])
-		strafe(data->game, KEY_A);
+		strafe(data->game, KEY_A, speed);
 	if (data->mlx->key_pressed[4])
-		move(data->game, KEY_S);
+		move(data->game, KEY_S, speed);
 	if (data->mlx->key_pressed[5])
-		strafe(data->game, KEY_D);
+		strafe(data->game, KEY_D, speed);
 	render(data->game, data->mlx);
 	return (0);
 }
@@ -81,11 +93,19 @@ void	game_loop(t_game *game, t_mlx *mlx)
 
 	data.game = game;
 	data.mlx = mlx;
-
 	game->dir_x = -1;
 	game->dir_y = 0;
 	game->plane_x = 0;
 	game->plane_y = 1;
+	game->speed_multiplier = 0;
+	mlx->key_pressed[0] = false;
+	mlx->key_pressed[1] = false;
+	mlx->key_pressed[2] = false;
+	mlx->key_pressed[3] = false;
+	mlx->key_pressed[4] = false;
+	mlx->key_pressed[5] = false;
+	mlx->key_pressed[6] = false;
+	mlx->key_pressed[7] = false;
 	init_image(mlx);
 	mlx_hook(mlx->win, 2, 1L, keypress, &data);
 	mlx_hook(mlx->win, 3, 2L, keyrelease, &data);
