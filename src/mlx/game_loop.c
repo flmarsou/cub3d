@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:55:48 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:51:44 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,31 @@ static void	render(t_game *game, t_mlx *mlx)
 	mlx_clear_window(mlx->mlx, mlx->win);
 	background(*game, mlx);
 	raycasting(game, mlx);
-	if (mlx->key_pressed[7] && WIN_X > CELL_COUNT * CELL_SIZE && WIN_Y > CELL_COUNT * CELL_SIZE)
+	if (mlx->key_pressed[7]
+		&& WIN_X > CELL_COUNT * CELL_SIZE && WIN_Y > CELL_COUNT * CELL_SIZE)
 		minimap(*game, mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
+}
+
+static int	loop(t_data *data)
+{
+	float	speed;
+
+	speed = get_speed(data->game, data->mlx);
+	if (data->mlx->key_pressed[0])
+		rotate(data->game, ROT_SPEED);
+	if (data->mlx->key_pressed[1])
+		rotate(data->game, -ROT_SPEED);
+	if (data->mlx->key_pressed[2])
+		move(data->game, KEY_W, speed);
+	if (data->mlx->key_pressed[3])
+		strafe(data->game, KEY_A, speed);
+	if (data->mlx->key_pressed[4])
+		move(data->game, KEY_S, speed);
+	if (data->mlx->key_pressed[5])
+		strafe(data->game, KEY_D, speed);
+	render(data->game, data->mlx);
+	return (0);
 }
 
 static int	keypress(int key, t_data *data)
@@ -70,27 +92,6 @@ static int	keyrelease(int key, t_data *data)
 	return (0);
 }
 
-static int	loop(t_data *data)
-{
-	float	speed;
-
-	speed = get_speed(data->game, data->mlx);
-	if (data->mlx->key_pressed[0])
-		rotate(data->game, ROT_SPEED);
-	if (data->mlx->key_pressed[1])
-		rotate(data->game, -ROT_SPEED);
-	if (data->mlx->key_pressed[2])
-		move(data->game, KEY_W, speed);
-	if (data->mlx->key_pressed[3])
-		strafe(data->game, KEY_A, speed);
-	if (data->mlx->key_pressed[4])
-		move(data->game, KEY_S, speed);
-	if (data->mlx->key_pressed[5])
-		strafe(data->game, KEY_D, speed);
-	render(data->game, data->mlx);
-	return (0);
-}
-
 void	game_loop(t_game *game, t_mlx *mlx)
 {
 	t_data	data;
@@ -98,6 +99,7 @@ void	game_loop(t_game *game, t_mlx *mlx)
 	data.game = game;
 	data.mlx = mlx;
 	init_image(mlx);
+	init_texture(*game, mlx);
 	mlx_hook(mlx->win, 2, 1L, keypress, &data);
 	mlx_hook(mlx->win, 3, 2L, keyrelease, &data);
 	mlx_loop_hook(mlx->mlx, loop, &data);
