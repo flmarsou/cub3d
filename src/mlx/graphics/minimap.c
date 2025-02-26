@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:10:30 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/24 12:28:06 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:09:29 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,18 @@ static void	draw_cell(t_mlx *mlx, unsigned int cell_x, unsigned int cell_y,
 }
 
 static void	fill_grid(t_game game,
-		unsigned char grid[MINIMAP_SIZE][MINIMAP_SIZE],
+		unsigned char grid[CELL_COUNT][CELL_COUNT],
 		unsigned int x, unsigned int y)
 {
 	int				scan_y;
 	int				scan_x;
 
-	scan_y = (int)game.pos_y - MINIMAP_SIZE / 2;
-	while (++y < MINIMAP_SIZE)
+	scan_y = (int)game.pos_y - CELL_COUNT / 2;
+	while (++y < CELL_COUNT)
 	{
 		x = -1;
-		scan_x = (int)game.pos_x - MINIMAP_SIZE / 2;
-		while (++x < MINIMAP_SIZE)
+		scan_x = (int)game.pos_x - CELL_COUNT / 2;
+		while (++x < CELL_COUNT)
 		{
 			if (scan_y < 0 || scan_y > (int)game.height || scan_x < 0
 				|| scan_x >= (int)ft_strlen(game.map[scan_y])
@@ -64,31 +64,31 @@ static void	fill_grid(t_game game,
 		}
 		scan_y++;
 	}
-	grid[MINIMAP_SIZE / 2][MINIMAP_SIZE / 2] = 'P';
+	grid[CELL_COUNT / 2][CELL_COUNT / 2] = 'P';
 }
 
 void	minimap(t_game game, t_mlx *mlx)
 {
-	unsigned char	grid[MINIMAP_SIZE][MINIMAP_SIZE];
+	unsigned char	grid[CELL_COUNT][CELL_COUNT];
 	unsigned int	cell_y;
 	unsigned int	cell_x;
 	int				color;
 
 	fill_grid(game, grid, -1, -1);
 	cell_y = 0;
-	while (cell_y < MINIMAP_SIZE)
+	while (cell_y < CELL_COUNT)
 	{
 		cell_x = 0;
-		while (cell_x < MINIMAP_SIZE)
+		while (cell_x < CELL_COUNT)
 		{
 			if (grid[cell_y][cell_x] == '0')
-				color = 0xFFFFFF;
+				color = CELL_GROUND_COLOR;
 			else if (grid[cell_y][cell_x] == '1')
-				color = 0x808080;
+				color = CELL_WALL_COLOR;
 			else if (grid[cell_y][cell_x] == ' ')
-				color = 0x000000;
+				color = CELL_EMPTY_COLOR;
 			else
-				color = 0x0000FF;
+				color = CELL_OTHER_COLOR;
 			draw_cell(mlx, cell_x, cell_y, color);
 			cell_x++;
 		}

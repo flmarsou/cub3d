@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/25 14:31:41 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:55:48 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	render(t_game *game, t_mlx *mlx)
 	mlx_clear_window(mlx->mlx, mlx->win);
 	background(*game, mlx);
 	raycasting(game, mlx);
-	if (mlx->key_pressed[7])
+	if (mlx->key_pressed[7] && WIN_X > CELL_COUNT * CELL_SIZE && WIN_Y > CELL_COUNT * CELL_SIZE)
 		minimap(*game, mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
 }
@@ -74,7 +74,7 @@ static int	loop(t_data *data)
 {
 	float	speed;
 
-	speed = get_speed(data->mlx);
+	speed = get_speed(data->game, data->mlx);
 	if (data->mlx->key_pressed[0])
 		rotate(data->game, ROT_SPEED);
 	if (data->mlx->key_pressed[1])
@@ -97,20 +97,6 @@ void	game_loop(t_game *game, t_mlx *mlx)
 
 	data.game = game;
 	data.mlx = mlx;
-	game->dir_x = -1;
-	game->dir_y = 0;
-	game->plane_x = 0;
-	game->plane_y = 0.66f;
-	game->speed_multiplier = 0;
-	mlx->key_pressed[0] = false;
-	mlx->key_pressed[1] = false;
-	mlx->key_pressed[2] = false;
-	mlx->key_pressed[3] = false;
-	mlx->key_pressed[4] = false;
-	mlx->key_pressed[5] = false;
-	mlx->key_pressed[6] = false;
-	mlx->key_pressed[7] = false;
-	mlx->key_pressed[8] = false;
 	init_image(mlx);
 	mlx_hook(mlx->win, 2, 1L, keypress, &data);
 	mlx_hook(mlx->win, 3, 2L, keyrelease, &data);

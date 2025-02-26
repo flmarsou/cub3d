@@ -6,29 +6,26 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:29:03 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/25 14:32:56 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:56:28 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-float	get_speed(t_mlx *mlx)
+float	get_speed(t_game *game, t_mlx *mlx)
 {
-	float	is_running;
-
+	game->speed_multiplier = 1;
 	if (mlx->key_pressed[6])
-		is_running = 2;
+		game->speed_multiplier = RUN_MULTIPLIER;
 	else if (mlx->key_pressed[8])
-		is_running = 0.33f;
-	else
-		is_running = 1;
+		game->speed_multiplier = CROUCH_MULTIPLIER;
 	if ((mlx->key_pressed[2] && mlx->key_pressed[3])
 		|| (mlx->key_pressed[2] && mlx->key_pressed[5])
 		|| (mlx->key_pressed[4] && mlx->key_pressed[3])
 		|| (mlx->key_pressed[4] && mlx->key_pressed[5]))
-		return (MOVE_SPEED / 2 * is_running);
+		return (MOVE_SPEED / 2 * game->speed_multiplier);
 	else
-		return (MOVE_SPEED * is_running);
+		return (MOVE_SPEED * game->speed_multiplier);
 }
 
 void	rotate(t_game *game, float speed)
