@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:12:22 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 12:43:39 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ static bool	check_sides(t_game *game)
 	y = 0;
 	while (game->map[y])
 	{
-		if ((game->map[y][0] != ' ' && game->map[y][0] != '1') || (game->map[y][ft_strlen(game->map[y]) - 1] != ' '
+		if ((game->map[y][0] != ' ' && game->map[y][0] != '1')
+			|| (game->map[y][ft_strlen(game->map[y]) - 1] != ' '
 			&& game->map[y][ft_strlen(game->map[y]) - 1] != '1'))
 			return (error_map(4, 0, 0, y));
 		y++;
