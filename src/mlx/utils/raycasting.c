@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:53:10 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/20 14:53:43 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:43:19 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,9 @@ static void	calculate_ray(t_game *game)
 	}
 }
 
-static void	dda(t_game *game)
+static void	perform_dda(t_game *game)
 {
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
+	while (true)
 	{
 		if (game->side_dist_x < game->side_dist_y)
 		{
@@ -60,11 +57,11 @@ static void	dda(t_game *game)
 			game->side = 1;
 		}
 		if (game->map[game->map_y][game->map_x] == '1')
-			hit = 1;
+			break ;
 	}
 }
 
-static void	calculate_wall_dist(t_game *game)
+static void	calculate_wall_dist_height(t_game *game)
 {
 	if (game->side == 0)
 		game->perp_wall_dist = (game->map_x - game->pos_x
@@ -72,38 +69,30 @@ static void	calculate_wall_dist(t_game *game)
 	else
 		game->perp_wall_dist = (game->map_y - game->pos_y
 				+ (1 - game->step_y) / 2) / game->ray_dir_y;
-}
-
-static void	calculate_wall_height(t_game *game)
-{
-	int	line_height;
-
-	line_height = (int)(WIN_Y / game->perp_wall_dist);
-	game->draw_start = -line_height / 2 + WIN_Y / 2;
-	game->draw_end = line_height / 2 + WIN_Y / 2;
+	game->line_height = (int)(WIN_Y / game->perp_wall_dist);
+	game->draw_start = -game->line_height / 2 + WIN_Y / 2;
+	game->draw_end = game->line_height / 2 + WIN_Y / 2;
 	if (game->draw_start < 0)
 		game->draw_start = 0;
 	if (game->draw_end >= WIN_Y)
 		game->draw_end = WIN_Y - 1;
 }
 
-static void	draw_vertical_slice(t_game *game, t_mlx *mlx, unsigned int x)
+static void	calculate_wall_side(t_game *game)
 {
-	int	color;
-	int	y;
-	int	offset;
-
-	if (game->side == 1)
-		color = 0xFF0000;
-	else
-		color = 0x00FF00;
-	y = game->draw_start;
-	while (y < game->draw_end)
+	if (game->side == 0)
 	{
-		offset = (y * mlx->image.line_length + x
-				* (mlx->image.bits_per_pixel / 8));
-		*(unsigned int *)(mlx->image.addr + offset) = color;
-		y++;
+		if (game->ray_dir_x < 0)
+			game->texture = 2;
+		else
+			game->texture = 3;
+	}
+	else
+	{
+		if (game->ray_dir_y < 0)
+			game->texture = 0;
+		else
+			game->texture = 1;
 	}
 }
 
@@ -122,10 +111,10 @@ void	raycasting(t_game *game, t_mlx *mlx)
 		game->map_x = (int)game->pos_x;
 		game->map_y = (int)game->pos_y;
 		calculate_ray(game);
-		dda(game);
-		calculate_wall_dist(game);
-		calculate_wall_height(game);
-		draw_vertical_slice(game, mlx, x);
+		perform_dda(game);
+		calculate_wall_dist_height(game);
+		calculate_wall_side(game);
+		texturing(game, mlx, x);
 		x++;
 	}
 }
