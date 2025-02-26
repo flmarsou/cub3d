@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./assets/textures/debug_no.xpm
+SO ./assets/textures/debug_so.xpm
+WE ./assets/textures/debug_we.xpm
+EA ./assets/textures/debug_ea.xpm
 F 150,150,150
 C 100,100,100
 
