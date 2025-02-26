@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:55:37 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:41:24 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,18 @@ typedef struct s_game
 	float			side_dist_y;		// Distance to the next Y grid line
 	int				step_x;				// Value for moving in the X direction
 	int				step_y;				// Value for moving in the Y direction
-	int				side;				// Horizontal or Vertical ray hit
+	int				side;				// X or Y ray hit
 	float			perp_wall_dist;		// Player-Wall perpendicular distance
+	int				line_height;		// Wall line height
+	// Texturing
+	int				texture;			// NO, SO, WE, EA ray hit
+	int				texture_x;
+	float			step;
+	float			tex_pos;
+	int				tex_y;
 	int				draw_start;			// Top of the wall
 	int				draw_end;			// Bottom of the wall
-	float			speed;				// Current speed
+	// Other
 	float			speed_multiplier;	// Running and diagonal speed
 }	t_game;
 
@@ -129,21 +136,33 @@ typedef struct s_game
 //     MiniLibX                       //
 //====================================//
 
+struct s_texture
+{
+	void				*img;
+	int					*data;
+	int					width;
+	int					height;
+	int					bits_per_pixel;
+	int					line_length;
+	int					endian;
+};
+
 struct s_image
 {
-	void			*img;			// Image pointer
-	char			*addr;			// Image data
-	int				bits_per_pixel;
-	int				line_length;
-	int				endian;
+	void				*img;			// Image pointer
+	char				*addr;			// Image data
+	int					bits_per_pixel;
+	int					line_length;
+	int					endian;
 };
 
 typedef struct s_mlx
 {
-	void			*mlx;			// MiniLibX pointer
-	void			*win;			// Window pointer
-	struct s_image	image;
-	bool			key_pressed[9];
+	void				*mlx;			// MiniLibX pointer
+	void				*win;			// Window pointer
+	struct s_image		image;
+	struct s_texture	texture[4];
+	bool				key_pressed[9];
 }	t_mlx;
 
 // Struct for passing both t_game and t_mlx
@@ -417,6 +436,8 @@ bool			init_window(t_mlx *mlx);
  */
 void			init_image(t_mlx *mlx);
 
+void			init_texture(t_game game, t_mlx *mlx);
+
 //====================================//
 //     Game Loop                      //
 //====================================//
@@ -424,9 +445,9 @@ void			init_image(t_mlx *mlx);
 void			game_loop(t_game *game, t_mlx *mlx);
 
 void			background(t_game game, t_mlx *mlx);
-void			raycasting(t_game *game, t_mlx *mlx);
 void			minimap(t_game game, t_mlx *mlx);
-
+void			raycasting(t_game *game, t_mlx *mlx);
+void			texturing(t_game *game, t_mlx *mlx, unsigned int x);
 float			get_speed(t_game *game, t_mlx *mlx);
 void			rotate(t_game *game, float speed);
 void			move(t_game *game, int key, float speed);
