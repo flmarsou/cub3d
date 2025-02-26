@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 14:41:24 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:27:40 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,14 +118,14 @@ typedef struct s_game
 	int				step_x;				// Value for moving in the X direction
 	int				step_y;				// Value for moving in the Y direction
 	int				side;				// X or Y ray hit
-	float			perp_wall_dist;		// Player-Wall perpendicular distance
 	int				line_height;		// Wall line height
+	float			perp_wall_dist;		// Player-Wall perpendicular distance
 	// Texturing
 	int				texture;			// NO, SO, WE, EA ray hit
 	int				texture_x;
+	int				texture_y;
+	float			texture_pos;
 	float			step;
-	float			tex_pos;
-	int				tex_y;
 	int				draw_start;			// Top of the wall
 	int				draw_end;			// Bottom of the wall
 	// Other
@@ -436,23 +436,85 @@ bool			init_window(t_mlx *mlx);
  */
 void			init_image(t_mlx *mlx);
 
+/**
+ * @brief Initializes the xpm files textures.
+ * 
+ * This function creates pointers to the XPM files for later uses.
+ * 
+ * @param mlx Pointer to the mlx structure.
+ */
 void			init_texture(t_game game, t_mlx *mlx);
 
 //====================================//
 //     Game Loop                      //
 //====================================//
 
+// TODO: Comments
 void			game_loop(t_game *game, t_mlx *mlx);
-
+// TODO: Comments
 void			background(t_game game, t_mlx *mlx);
+// TODO: Comments
 void			minimap(t_game game, t_mlx *mlx);
+// TODO: Comments
 void			raycasting(t_game *game, t_mlx *mlx);
+// TODO: Comments
 void			texturing(t_game *game, t_mlx *mlx, unsigned int x);
+
+/**
+ * @brief Calculates the player's movement speed based on game settings.
+ * 
+ * This function returns the speed at which the player can move, taking into account 
+ * various game factors like diagonal inputs, running, and crouching.
+ * 
+ * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
+ * @return The newer speed of the player in the game.
+ */
 float			get_speed(t_game *game, t_mlx *mlx);
+
+/**
+ * @brief Rotates the player's camera based on input.
+ * 
+ * This function handles the player's camera angle based on user input,
+ * allowing the player to look left or right.
+ * 
+ * @param game Pointer to the main structure.
+ * @param speed The speed at which to rotate the camera.
+ */
 void			rotate(t_game *game, float speed);
+
+/**
+ * @brief Moves the player forward or backward based on input.
+ * 
+ * This function handles movement, allowing the player 
+ * to move forward or backward.
+ * 
+ * @param game Pointer to the main structure.
+ * @param key The key press that indicates the strafing direction.
+ * @param speed The speed at which to move.
+ */
 void			move(t_game *game, int key, float speed);
+
+/**
+ * @brief Strafes the player left or right based on input.
+ * 
+ * This function handles strafing (sideways movement), allowing the player 
+ * to move left or right.
+ * 
+ * @param game Pointer to the main structure.
+ * @param key The key press that indicates the strafing direction.
+ * @param speed The speed at which to strafe.
+ */
 void			strafe(t_game *game, int key, float speed);
 
+/**
+ * @brief Closes the game and frees allocated resources.
+ * 
+ * This function handles cleaning up any resources and properly exits the game,
+ * closing the window and releasing any used resources.
+ * 
+ * @param data Pointer to the data structure containing game and mlx.
+ */
 int				close_game(t_data *data);
 
 #endif
