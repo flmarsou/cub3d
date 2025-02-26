@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:09:23 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 13:16:44 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:11:05 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ unsigned int	check_map_line(t_game *game, char *line)
 	{
 		if (!ft_ismap(line[i]))
 			return (error_map(1, line[i], 0, 0));
-		if (!game->player_found && (line[i] == N || line[i] == S
-				|| line[i] == W || line[i] == E))
+		if (!game->player_found && (line[i] == 'N' || line[i] == 'S'
+				|| line[i] == 'W' || line[i] == 'E'))
 			game->player_found = true;
-		else if (game->player_found && (line[i] == N || line[i] == S
-				|| line[i] == W || line[i] == E))
+		else if (game->player_found && (line[i] == 'N' || line[i] == 'S'
+				|| line[i] == 'W' || line[i] == 'E'))
 			return (error_map(2, 0, 0, 0));
 		i++;
 	}

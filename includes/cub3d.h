@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/25 14:27:41 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:55:37 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,6 @@ enum
 	FLAG_ACCEPT	= (FLAG_NO | FLAG_SO | FLAG_WE | FLAG_EA | FLAG_F | FLAG_C)
 };
 
-// Map Characters
-# define N					'N'
-# define S					'S'
-# define W					'W'
-# define E					'E'
-# define EMPTY				' '
-# define WALL				'1'
-# define GROUND				'0'
-
 // MiniLibX - Window
 # define WIN_X				1280
 # define WIN_Y				720
@@ -71,11 +62,18 @@ enum
 # define KEY_M				109
 # define KEY_LEFT_CTRL		65507
 
-// Stats
+// Player Options
 # define MOVE_SPEED			0.01f
 # define ROT_SPEED			0.006f
-# define MINIMAP_SIZE		21
-# define CELL_SIZE			10
+# define CROUCH_MULTIPLIER	0.33f
+# define RUN_MULTIPLIER		1.66f
+// Minimap Options
+# define CELL_COUNT			21			// X and Y cells count
+# define CELL_SIZE			10			// X and Y pixel count per cell
+# define CELL_GROUND_COLOR	0xFFFFFF
+# define CELL_WALL_COLOR	0x808080
+# define CELL_EMPTY_COLOR	0x000000
+# define CELL_OTHER_COLOR	0x0000FF
 
 //============================================================================//
 //     Structs                                                                //
@@ -429,7 +427,7 @@ void			background(t_game game, t_mlx *mlx);
 void			raycasting(t_game *game, t_mlx *mlx);
 void			minimap(t_game game, t_mlx *mlx);
 
-float			get_speed(t_mlx *mlx);
+float			get_speed(t_game *game, t_mlx *mlx);
 void			rotate(t_game *game, float speed);
 void			move(t_game *game, int key, float speed);
 void			strafe(t_game *game, int key, float speed);
