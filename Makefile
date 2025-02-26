@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/26 13:00:28 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/02/26 15:13:06 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ EXE			:=	cub3d
 VPATH		:=	src \
 				src/utils \
 				src/parser : src/parser/args : src/parser/keys : src/parser/colors : src/parser/map \
-				src/mlx	: src/mlx/graphics : src/mlx/utils \
+				src/game : src/game/init : src/game/render \
 
 SRC			:=	main.c \
 				free.c \
@@ -44,11 +44,11 @@ SRC_MLX		:=	game_loop.c \
 				init_window.c \
 				init_image.c \
 				init_texture.c \
-				minimap.c \
 				background.c \
+				movement.c \
 				raycasting.c \
 				texturing.c \
-				movement.c \
+				minimap.c \
 				game_stop.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER} ${SRC_MLX}
@@ -60,7 +60,7 @@ MINILIBX	:=	includes/.MiniLibX
 
 # Variables
 CC			:=	cc
-CFLAGS		:=  -Wall -Wextra -Iincludes -Iincludes/.MiniLibX -O2 -fsanitize=address -g
+CFLAGS		:=  -Wall -Wextra -Iincludes -Iincludes/.MiniLibX -O2
 LIBXFLAGS	:=	-L${MINILIBX} -lmlx -lX11 -lXext -lm
 
 # Makefile
