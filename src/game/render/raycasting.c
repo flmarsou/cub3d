@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:53:10 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 14:43:19 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/27 08:51:23 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,6 @@ static void	calculate_wall_dist_height(t_game *game)
 		game->draw_end = WIN_Y - 1;
 }
 
-static void	calculate_wall_side(t_game *game)
-{
-	if (game->side == 0)
-	{
-		if (game->ray_dir_x < 0)
-			game->texture = 2;
-		else
-			game->texture = 3;
-	}
-	else
-	{
-		if (game->ray_dir_y < 0)
-			game->texture = 0;
-		else
-			game->texture = 1;
-	}
-}
-
 void	raycasting(t_game *game, t_mlx *mlx)
 {
 	unsigned int	x;
@@ -113,7 +95,6 @@ void	raycasting(t_game *game, t_mlx *mlx)
 		calculate_ray(game);
 		perform_dda(game);
 		calculate_wall_dist_height(game);
-		calculate_wall_side(game);
 		texturing(game, mlx, x);
 		x++;
 	}
