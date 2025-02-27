@@ -6,22 +6,11 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 13:51:44 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:59:07 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	render(t_game *game, t_mlx *mlx)
-{
-	mlx_clear_window(mlx->mlx, mlx->win);
-	background(*game, mlx);
-	raycasting(game, mlx);
-	if (mlx->key_pressed[7]
-		&& WIN_X > CELL_COUNT * CELL_SIZE && WIN_Y > CELL_COUNT * CELL_SIZE)
-		minimap(*game, mlx);
-	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->image.img, 0, 0);
-}
 
 static int	loop(t_data *data)
 {
@@ -44,7 +33,7 @@ static int	loop(t_data *data)
 	return (0);
 }
 
-static int	keypress(int key, t_data *data)
+static int	handle_keypress(int key, t_data *data)
 {
 	if (key == KEY_ESC)
 		close_game(data);
@@ -71,7 +60,7 @@ static int	keypress(int key, t_data *data)
 	return (0);
 }
 
-static int	keyrelease(int key, t_data *data)
+static int	handle_keyrelease(int key, t_data *data)
 {
 	if (key == KEY_ARROW_LEFT)
 		data->mlx->key_pressed[0] = false;
@@ -92,6 +81,17 @@ static int	keyrelease(int key, t_data *data)
 	return (0);
 }
 
+static int	handle_mouse(int cursor_x, int cursor_y, t_data *data)
+{
+	(void)cursor_y;
+	mlx_mouse_move(data->mlx->mlx, data->mlx->win, WIN_X / 2, WIN_Y / 2);
+	if (cursor_x < WIN_X / 2)
+		rotate(data->game, ROT_SPEED * 2.5f);
+	if (cursor_x > WIN_X / 2)
+		rotate(data->game, -ROT_SPEED * 2.5f);
+	return (0);
+}
+
 void	game_loop(t_game *game, t_mlx *mlx)
 {
 	t_data	data;
@@ -100,9 +100,11 @@ void	game_loop(t_game *game, t_mlx *mlx)
 	data.mlx = mlx;
 	init_image(mlx);
 	init_texture(*game, mlx);
-	mlx_hook(mlx->win, 2, 1L, keypress, &data);
-	mlx_hook(mlx->win, 3, 2L, keyrelease, &data);
+	mlx_mouse_hide(mlx->mlx, mlx->win);
+	mlx_hook(mlx->win, KEY_PRESS, KEY_PRESS_MASK, handle_keypress, &data);
+	mlx_hook(mlx->win, KEY_RELEASE, KEY_RELEASE_MASK, handle_keyrelease, &data);
+	mlx_hook(mlx->win, MOTION_NOTIFY, POINTER_MOTION_MASK, handle_mouse, &data);
 	mlx_loop_hook(mlx->mlx, loop, &data);
-	mlx_hook(mlx->win, 17, 0L, close_game, &data);
+	mlx_hook(mlx->win, DESTROY_NOTIFY, NO_EVENT_MASK, close_game, &data);
 	mlx_loop(mlx->mlx);
 }
