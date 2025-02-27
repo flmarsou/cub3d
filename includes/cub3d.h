@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 15:27:40 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/02/27 09:59:52 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,46 @@ enum
 };
 
 // MiniLibX - Window
-# define WIN_X				1280
-# define WIN_Y				720
-# define WIN_TITLE			"Cub3D - By flmarsou and rdedola"
+# define WIN_X					1280
+# define WIN_Y					720
+# define WIN_TITLE				"Cub3D - By flmarsou and rdedola"
+
+// MiniLibX - Events
+# define KEY_PRESS				2
+# define KEY_RELEASE			3
+# define MOTION_NOTIFY			6
+# define DESTROY_NOTIFY			17
+
+// MiniLibX - Masks
+# define NO_EVENT_MASK			0L
+# define KEY_PRESS_MASK			1L
+# define KEY_RELEASE_MASK		2L
+# define POINTER_MOTION_MASK	64L
 
 // MiniLibX - Keys
-# define KEY_ESC			65307
-# define KEY_ARROW_LEFT		65361
-# define KEY_ARROW_RIGHT	65363
-# define KEY_W				119
-# define KEY_A				97
-# define KEY_S				115
-# define KEY_D				100
-# define KEY_LEFT_SHIFT		65505
-# define KEY_M				109
-# define KEY_LEFT_CTRL		65507
+# define KEY_ESC				65307
+# define KEY_ARROW_LEFT			65361
+# define KEY_ARROW_RIGHT		65363
+# define KEY_W					119
+# define KEY_A					97
+# define KEY_S					115
+# define KEY_D					100
+# define KEY_LEFT_SHIFT			65505
+# define KEY_M					109
+# define KEY_LEFT_CTRL			65507
 
 // Player Options
-# define MOVE_SPEED			0.01f
-# define ROT_SPEED			0.006f
-# define CROUCH_MULTIPLIER	0.33f
-# define RUN_MULTIPLIER		1.66f
+# define MOVE_SPEED				0.01f
+# define ROT_SPEED				0.006f
+# define CROUCH_MULTIPLIER		0.33f
+# define RUN_MULTIPLIER			1.66f
 // Minimap Options
-# define CELL_COUNT			21			// X and Y cells count
-# define CELL_SIZE			10			// X and Y pixel count per cell
-# define CELL_GROUND_COLOR	0xFFFFFF
-# define CELL_WALL_COLOR	0x808080
-# define CELL_EMPTY_COLOR	0x000000
-# define CELL_OTHER_COLOR	0x0000FF
+# define CELL_COUNT				21			// X and Y cells count
+# define CELL_SIZE				10			// X and Y pixel count per cell
+# define CELL_GROUND_COLOR		0xFFFFFF
+# define CELL_WALL_COLOR		0x808080
+# define CELL_EMPTY_COLOR		0x000000
+# define CELL_OTHER_COLOR		0x0000FF
 
 //============================================================================//
 //     Structs                                                                //
@@ -449,22 +461,64 @@ void			init_texture(t_game game, t_mlx *mlx);
 //     Game Loop                      //
 //====================================//
 
-// TODO: Comments
+/**
+ * @brief Loop function for the MiniLibX.
+ * 
+ * Runs all initialization functions for the image buffer, textures, etc...
+ * Reads user input (key press, key release, etc...).
+ * Runs the MiniLibX loop for rendering and movements.
+ * 
+ * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
+ * @return The newer speed of the player in the game.
+ */
 void			game_loop(t_game *game, t_mlx *mlx);
-// TODO: Comments
+
+/**
+ * @brief Add a background to the image buffer.
+ * 
+ * Draws the `C` key color from the .cub file on the upper half,
+ * and the `F` key color on the lower half.
+ * 
+ * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
+ * @return The newer speed of the player in the game.
+ */
 void			background(t_game game, t_mlx *mlx);
-// TODO: Comments
+
+/**
+ * @brief Add a minimap to the image buffer.
+ * 
+ * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
+ * @return The newer speed of the player in the game.
+ */
 void			minimap(t_game game, t_mlx *mlx);
-// TODO: Comments
+
+/**
+ * @brief Does all the necessary calculations for raycasting.
+ * 
+ * 1. Calculates the distance from the player and the walls.
+ * 2. perform_dda
+ * 3. Calculates the walls distance and height.
+ * 
+ * @param game Pointer to the main structure.
+ * @param mlx Pointer to the mlx structure.
+ */
 void			raycasting(t_game *game, t_mlx *mlx);
+
 // TODO: Comments
 void			texturing(t_game *game, t_mlx *mlx, unsigned int x);
+
+// TODO: Comments
+void			render(t_game *game, t_mlx *mlx);
 
 /**
  * @brief Calculates the player's movement speed based on game settings.
  * 
- * This function returns the speed at which the player can move, taking into account 
- * various game factors like diagonal inputs, running, and crouching.
+ * This function returns the speed at which the player can move,
+ * taking into account various game factors like diagonal inputs,
+ * running, and crouching.
  * 
  * @param game Pointer to the main structure.
  * @param mlx Pointer to the mlx structure.
