@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:52:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:58:47 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/03 09:34:14 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	init_structs(t_game *game, t_mlx *mlx)
 	game->speed_multiplier = 1;
 	while (i < 9)
 		mlx->key_pressed[i++] = false;
+	mlx->frames = 0;
 }
 
 int	main(int argc, char **argv)

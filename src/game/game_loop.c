@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/03 09:40:42 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/03 09:41:36 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static int	loop(t_data *data)
 	if (data->mlx->key_pressed[5])
 		strafe(data->game, KEY_D, speed);
 	render(data->game, data->mlx);
+	if (data->mlx->frames > 128)
+		data->mlx->frames = 0;
+	else
+		data->mlx->frames++;
 	return (0);
 }
 
