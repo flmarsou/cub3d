@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/27 09:59:52 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/03 09:34:00 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,8 +161,8 @@ struct s_texture
 
 struct s_image
 {
-	void				*img;			// Image pointer
-	char				*addr;			// Image data
+	void				*img;
+	char				*addr;
 	int					bits_per_pixel;
 	int					line_length;
 	int					endian;
@@ -170,11 +170,12 @@ struct s_image
 
 typedef struct s_mlx
 {
-	void				*mlx;			// MiniLibX pointer
-	void				*win;			// Window pointer
+	void				*mlx;
+	void				*win;
 	struct s_image		image;
 	struct s_texture	texture[4];
 	bool				key_pressed[9];
+	unsigned int		frames;
 }	t_mlx;
 
 // Struct for passing both t_game and t_mlx
@@ -455,7 +456,7 @@ void			init_image(t_mlx *mlx);
  * 
  * @param mlx Pointer to the mlx structure.
  */
-void			init_texture(t_game game, t_mlx *mlx);
+bool			init_texture(t_game game, t_mlx *mlx);
 
 //====================================//
 //     Game Loop                      //

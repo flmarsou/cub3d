@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/27 09:59:07 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/03 09:40:42 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ void	game_loop(t_game *game, t_mlx *mlx)
 	data.game = game;
 	data.mlx = mlx;
 	init_image(mlx);
-	init_texture(*game, mlx);
+	if (!init_texture(*game, mlx))
+		close_game(&data);
 	mlx_mouse_hide(mlx->mlx, mlx->win);
 	mlx_hook(mlx->win, KEY_PRESS, KEY_PRESS_MASK, handle_keypress, &data);
 	mlx_hook(mlx->win, KEY_RELEASE, KEY_RELEASE_MASK, handle_keyrelease, &data);
