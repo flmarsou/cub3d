@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/03 09:41:36 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:06:39 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,10 @@ static int	handle_keypress(int key, t_data *data)
 		data->mlx->key_pressed[7] = false;
 	if (key == KEY_LEFT_CTRL)
 		data->mlx->key_pressed[8] = true;
+	if (key == KEY_E && !data->game->doors_interact)
+		data->game->doors_interact = true;
+	else if (key == KEY_E && data->game->doors_interact)
+		data->game->doors_interact = false;
 	return (0);
 }
 

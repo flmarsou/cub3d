@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:53:10 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 14:42:17 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:19:11 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void	calculate_wall_dist_height(t_game *game)
 		game->draw_end = WIN_Y - 1;
 }
 
-void	raycast_doors(t_game *game, t_mlx *mlx)
+void	raycast_doors(t_game *game, t_mlx *mlx, unsigned char frame)
 {
 	unsigned int	x;
 
@@ -98,7 +98,7 @@ void	raycast_doors(t_game *game, t_mlx *mlx)
 		if (perform_dda(game))
 		{
 			calculate_wall_dist_height(game);
-			draw_doors(game, mlx, x);
+			draw_doors(game, mlx, x, frame);
 		}
 		x++;
 	}

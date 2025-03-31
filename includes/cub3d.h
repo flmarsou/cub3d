@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 14:27:33 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:24:29 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ enum
 # define KEY_ESC				65307
 # define KEY_ARROW_LEFT			65361
 # define KEY_ARROW_RIGHT		65363
+# define KEY_E					101
 # define KEY_W					119
 # define KEY_A					97
 # define KEY_S					115
@@ -84,8 +85,8 @@ enum
 # define CELL_SIZE				10			// X and Y pixel count per cell
 # define CELL_GROUND_COLOR		0xFFFFFF
 # define CELL_WALL_COLOR		0x808080
+# define CELL_DOOR_COLOR		0xFF0000
 # define CELL_EMPTY_COLOR		0x000000
-# define CELL_OTHER_COLOR		0x0000FF
 
 // Door Textures
 # define DOOR_1					"./assets/textures/doors/1.xpm"
@@ -140,6 +141,7 @@ typedef struct s_game
 	int				side;				// X or Y ray hit
 	int				line_height;		// Wall line height
 	float			perp_wall_dist;		// Player-Wall perpendicular distance
+	bool			doors_interact;		// E to open/close doors
 	// Texturing
 	int				texture;			// NO, SO, WE, EA ray hit
 	int				texture_x;
@@ -512,11 +514,11 @@ void			minimap(t_game game, t_mlx *mlx);
  * @param mlx Pointer to the mlx structure.
  */
 void			raycast_walls(t_game *game, t_mlx *mlx);
-void			raycast_doors(t_game *game, t_mlx *mlx);
+void			raycast_doors(t_game *game, t_mlx *mlx, unsigned char frame);
 
 // TODO: Comments
 void			draw_walls(t_game *game, t_mlx *mlx, unsigned int x);
-void			draw_doors(t_game *game, t_mlx *mlx, unsigned int x);
+void			draw_doors(t_game *game, t_mlx *mlx, unsigned int x, unsigned char frame);
 
 // TODO: Comments
 void			render(t_game *game, t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 14:29:03 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:56:28 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:08:48 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,20 @@ void	move(t_game *game, int key, float speed)
 {
 	if (key == KEY_W)
 	{
-		if (game->map[(int)game->pos_y]
-			[(int)(game->pos_x + game->dir_x * speed)] != '1')
+		if (game->map[(int)game->pos_y][(int)(game->pos_x + game->dir_x * speed)] != '1'
+			&& (game->map[(int)game->pos_y][(int)(game->pos_x + game->dir_x * speed)] != 'D' || game->doors_interact))
 			game->pos_x += game->dir_x * speed;
-		if (game->map[(int)(game->pos_y + game->dir_y * speed)]
-				[(int)game->pos_x] != '1')
+		if (game->map[(int)(game->pos_y + game->dir_y * speed)][(int)game->pos_x] != '1'
+			&& (game->map[(int)(game->pos_y + game->dir_y * speed)][(int)game->pos_x] != 'D' || game->doors_interact))
 			game->pos_y += game->dir_y * speed;
 	}
 	else if (key == KEY_S)
 	{
-		if (game->map[(int)game->pos_y]
-			[(int)(game->pos_x - game->dir_x * speed)] != '1')
+		if (game->map[(int)game->pos_y][(int)(game->pos_x - game->dir_x * speed)] != '1'
+			&& (game->map[(int)game->pos_y][(int)(game->pos_x - game->dir_x * speed)] != 'D' || game->doors_interact))
 			game->pos_x -= game->dir_x * speed;
-		if (game->map[(int)(game->pos_y - game->dir_y * speed)]
-				[(int)game->pos_x] != '1')
+		if (game->map[(int)(game->pos_y - game->dir_y * speed)][(int)game->pos_x] != '1'
+			&& (game->map[(int)(game->pos_y - game->dir_y * speed)][(int)game->pos_x] != 'D' || game->doors_interact))
 			game->pos_y -= game->dir_y * speed;
 	}
 }
@@ -65,20 +65,20 @@ void	strafe(t_game *game, int key, float speed)
 {
 	if (key == KEY_A)
 	{
-		if (game->map[(int)game->pos_y]
-			[(int)(game->pos_x - game->plane_x * speed)] != '1')
+		if (game->map[(int)game->pos_y][(int)(game->pos_x - game->plane_x * speed)] != '1'
+			&& (game->map[(int)game->pos_y][(int)(game->pos_x - game->plane_x * speed)] != 'D' || game->doors_interact))
 			game->pos_x -= game->plane_x * speed;
-		if (game->map[(int)(game->pos_y - game->plane_y * speed)]
-				[(int)game->pos_x] != '1')
+		if (game->map[(int)(game->pos_y - game->plane_y * speed)][(int)game->pos_x] != '1'
+			&& (game->map[(int)(game->pos_y - game->plane_y * speed)][(int)game->pos_x] != 'D' || game->doors_interact))
 			game->pos_y -= game->plane_y * speed;
 	}
 	else if (key == KEY_D)
 	{
-		if (game->map[(int)game->pos_y]
-			[(int)(game->pos_x + game->plane_x * speed)] != '1')
+		if (game->map[(int)game->pos_y][(int)(game->pos_x + game->plane_x * speed)] != '1'
+			&& (game->map[(int)game->pos_y][(int)(game->pos_x + game->plane_x * speed)] != 'D' || game->doors_interact))
 			game->pos_x += game->plane_x * speed;
-		if (game->map[(int)(game->pos_y + game->plane_y * speed)]
-				[(int)game->pos_x] != '1')
+		if (game->map[(int)(game->pos_y + game->plane_y * speed)][(int)game->pos_x] != '1'
+			&& (game->map[(int)(game->pos_y + game->plane_y * speed)][(int)game->pos_x] != 'D' || game->doors_interact))
 			game->pos_y += game->plane_y * speed;
 	}
 }
