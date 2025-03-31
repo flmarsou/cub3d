@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycast_walls.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 11:53:10 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/27 08:51:23 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:36:46 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	calculate_wall_dist_height(t_game *game)
 		game->draw_end = WIN_Y - 1;
 }
 
-void	raycasting(t_game *game, t_mlx *mlx)
+void	raycast_walls(t_game *game, t_mlx *mlx)
 {
 	unsigned int	x;
 
@@ -95,7 +95,7 @@ void	raycasting(t_game *game, t_mlx *mlx)
 		calculate_ray(game);
 		perform_dda(game);
 		calculate_wall_dist_height(game);
-		texturing(game, mlx, x);
+		draw_walls(game, mlx, x);
 		x++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 10:32:02 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:27:33 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ enum
 # define CELL_WALL_COLOR		0x808080
 # define CELL_EMPTY_COLOR		0x000000
 # define CELL_OTHER_COLOR		0x0000FF
+
+// Door Textures
+# define DOOR_1					"./assets/textures/doors/1.xpm"
+# define DOOR_2					"./assets/textures/doors/2.xpm"
+# define DOOR_3					"./assets/textures/doors/3.xpm"
+# define DOOR_4					"./assets/textures/doors/4.xpm"
 
 //============================================================================//
 //     Structs                                                                //
@@ -175,7 +181,7 @@ typedef struct s_mlx
 	void				*mlx;
 	void				*win;
 	struct s_image		image;
-	struct s_texture	texture[5];
+	struct s_texture	texture[8];
 	bool				key_pressed[9];
 	unsigned int		frames;
 }	t_mlx;
@@ -505,10 +511,12 @@ void			minimap(t_game game, t_mlx *mlx);
  * @param game Pointer to the main structure.
  * @param mlx Pointer to the mlx structure.
  */
-void			raycasting(t_game *game, t_mlx *mlx);
+void			raycast_walls(t_game *game, t_mlx *mlx);
+void			raycast_doors(t_game *game, t_mlx *mlx);
 
 // TODO: Comments
-void			texturing(t_game *game, t_mlx *mlx, unsigned int x);
+void			draw_walls(t_game *game, t_mlx *mlx, unsigned int x);
+void			draw_doors(t_game *game, t_mlx *mlx, unsigned int x);
 
 // TODO: Comments
 void			render(t_game *game, t_mlx *mlx);

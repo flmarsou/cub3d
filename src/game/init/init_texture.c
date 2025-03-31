@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:45:17 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 10:33:34 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:45:50 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,57 @@ static bool	init_we_ea(t_game game, t_mlx *mlx)
 	return (true);
 }
 
-static bool	init_d(t_game game, t_mlx *mlx)
+static bool	init_d1_d2(t_mlx *mlx)
 {
-	mlx->texture[4].img = mlx_xpm_file_to_image(mlx->mlx, game.d_path,
+	mlx->texture[4].img = mlx_xpm_file_to_image(mlx->mlx, DOOR_1,
 			&mlx->texture[4].width,
 			&mlx->texture[4].height);
 	if (!mlx->texture[4].img)
-		return (printf(ERR"Door texture \"%s\" not found!\n"RESET,
-				game.d_path), false);
+		return (printf(ERR"Texture DOOR_1 \"%s\" not found!\n"RESET,
+				DOOR_1), false);
+	mlx->texture[4].data = (int *)mlx_get_data_addr(mlx->texture[4].img,
+			&mlx->texture[4].bits_per_pixel,
+			&mlx->texture[4].line_length,
+			&mlx->texture[4].endian);
+	printf(OK"Texture DOOR_1 \"%s\" loaded!\n"RESET, DOOR_1);
+	mlx->texture[5].img = mlx_xpm_file_to_image(mlx->mlx, DOOR_2,
+			&mlx->texture[5].width,
+			&mlx->texture[5].height);
+	if (!mlx->texture[5].img)
+		return (printf(ERR"Texture DOOR_2 \"%s\" not found!\n"RESET,
+				DOOR_2), false);
+	mlx->texture[5].data = (int *)mlx_get_data_addr(mlx->texture[5].img,
+			&mlx->texture[5].bits_per_pixel,
+			&mlx->texture[5].line_length,
+			&mlx->texture[5].endian);
+	printf(OK"Texture DOOR_2 \"%s\" loaded!\n"RESET, DOOR_2);
+	return (true);
+}
+
+static bool	init_d3_d4(t_mlx *mlx)
+{
+	mlx->texture[6].img = mlx_xpm_file_to_image(mlx->mlx, DOOR_3,
+			&mlx->texture[6].width,
+			&mlx->texture[6].height);
+	if (!mlx->texture[6].img)
+		return (printf(ERR"Texture DOOR_3 \"%s\" not found!\n"RESET,
+				DOOR_3), false);
+	mlx->texture[6].data = (int *)mlx_get_data_addr(mlx->texture[6].img,
+			&mlx->texture[6].bits_per_pixel,
+			&mlx->texture[6].line_length,
+			&mlx->texture[6].endian);
+	printf(OK"Texture DOOR_3 \"%s\" loaded!\n"RESET, DOOR_3);
+	mlx->texture[7].img = mlx_xpm_file_to_image(mlx->mlx, DOOR_4,
+			&mlx->texture[7].width,
+			&mlx->texture[7].height);
+	if (!mlx->texture[7].img)
+		return (printf(ERR"Texture DOOR_4 \"%s\" not found!\n"RESET,
+				DOOR_4), false);
+	mlx->texture[7].data = (int *)mlx_get_data_addr(mlx->texture[7].img,
+			&mlx->texture[7].bits_per_pixel,
+			&mlx->texture[7].line_length,
+			&mlx->texture[7].endian);
+	printf(OK"Texture DOOR_4 \"%s\" loaded!\n"RESET, DOOR_4);
 	return (true);
 }
 
@@ -81,7 +124,7 @@ bool	init_texture(t_game game, t_mlx *mlx)
 {
 	if (!init_no_so(game, mlx) || !init_we_ea(game, mlx))
 		return (false);
-	if (game.has_doors && !init_d(game, mlx))
+	if (game.has_doors && (!init_d1_d2(mlx) || !init_d3_d4(mlx)))
 		return (false);
 	return (true);
 }

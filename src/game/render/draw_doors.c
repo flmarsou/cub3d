@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texturing.c                                        :+:      :+:    :+:   */
+/*   draw_doors.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:58:43 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/27 08:51:14 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:32:08 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	calculate_wall_side(t_game *game)
-{
-	if (game->side == 0)
-	{
-		if (game->ray_dir_x < 0)
-			game->texture = 2;
-		else
-			game->texture = 3;
-	}
-	else
-	{
-		if (game->ray_dir_y < 0)
-			game->texture = 0;
-		else
-			game->texture = 1;
-	}
-}
 
 static int	calculate_texture_x(t_game game, t_mlx mlx)
 {
@@ -48,13 +30,13 @@ static int	calculate_texture_x(t_game game, t_mlx mlx)
 	return (texture_x);
 }
 
-void	texturing(t_game *game, t_mlx *mlx, unsigned int x)
+void	draw_doors(t_game *game, t_mlx *mlx, unsigned int x)
 {
 	int		y;
 	int		color;
 	int		offset;
 
-	calculate_wall_side(game);
+	game->texture = 4;
 	game->texture_x = calculate_texture_x(*game, *mlx);
 	game->step = (float)mlx->texture[game->texture].height / game->line_height;
 	game->texture_pos = (game->draw_start - WIN_Y / 2 + game->line_height / 2)

@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/02/27 10:01:32 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/03/31 14:20:27 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,12 @@ SRC_MLX		:=	game_loop.c \
 				init_image.c \
 				init_texture.c \
 				background.c \
-				raycasting.c \
-				texturing.c \
+				raycast_walls.c \
+				raycast_doors.c \
+				draw_walls.c \
+				draw_doors.c \
 				minimap.c \
-				renderer.c \
+				render.c \
 				movement.c \
 				game_stop.c \
 
