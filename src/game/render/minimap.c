@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:10:30 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:09:29 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 15:14:29 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ static void	fill_grid(t_game game,
 				grid[y][x] = '0';
 			else if (game.map[scan_y][scan_x] == '1')
 				grid[y][x] = '1';
+			else if (game.map[scan_y][scan_x] == 'D')
+				grid[y][x] = 'D';
 			else
 				grid[y][x] = '2';
 			scan_x++;
@@ -85,10 +87,10 @@ void	minimap(t_game game, t_mlx *mlx)
 				color = CELL_GROUND_COLOR;
 			else if (grid[cell_y][cell_x] == '1')
 				color = CELL_WALL_COLOR;
-			else if (grid[cell_y][cell_x] == ' ')
-				color = CELL_EMPTY_COLOR;
+			else if (grid[cell_y][cell_x] == 'D')
+				color = CELL_DOOR_COLOR;
 			else
-				color = CELL_OTHER_COLOR;
+				color = CELL_EMPTY_COLOR;
 			draw_cell(mlx, cell_x, cell_y, color);
 			cell_x++;
 		}
