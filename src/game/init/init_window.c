@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 13:32:04 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/27 12:27:11 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 11:59:00 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	init_window(t_mlx *mlx)
 		return (false);
 	}
 	mlx->win = mlx_new_window(mlx->mlx, WIN_X, WIN_Y, WIN_TITLE);
-	if (!mlx->mlx)
+	if (!mlx->win)
 	{
 		printf(ERR"Failed to create a window!\n"RESET);
 		return (false);
