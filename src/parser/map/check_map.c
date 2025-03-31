@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 12:43:39 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:51:16 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	check_closed(t_game *game)
 		x = 1;
 		while (game->map[y][x + 1])
 		{
-			if (game->map[y][x] == '0'
+			if (game->map[y][x] == '0' || game->map[y][x] == 'D'
 				|| game->map[y][x] == 'N' || game->map[y][x] == 'S'
 				|| game->map[y][x] == 'W' || game->map[y][x] == 'E')
 			{

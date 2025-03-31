@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:56:24 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/18 14:56:00 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:37:52 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ bool	parsing(int argc, char **argv, t_game *game)
 	game->map = NULL;
 	if (!parse_args(argc, argv, &fd))
 		return (false);
+	if (argc == 3)
+		game->d_path = argv[2];
 	printf(OK"Correct Args!\n");
 	if (!parse_keys(fd, game))
 		return (close(fd), false);

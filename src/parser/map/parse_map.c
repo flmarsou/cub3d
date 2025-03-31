@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 15:09:23 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/26 09:11:05 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:43:32 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ unsigned int	check_map_line(t_game *game, char *line)
 	i = 0;
 	while (line[i])
 	{
+		if (line[i] == 'D')
+			game->has_doors = true;
 		if (!ft_ismap(line[i]))
 			return (error_map(1, line[i], 0, 0));
 		if (!game->player_found && (line[i] == 'N' || line[i] == 'S'

@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:52:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/03 09:34:14 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:34:52 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	init_structs(t_game *game, t_mlx *mlx)
 	game->so_path = NULL;
 	game->we_path = NULL;
 	game->ea_path = NULL;
+	game->d_path = NULL;
+	game->has_doors = false;
 	game->floor_raw = NULL;
 	game->ceiling_raw = NULL;
 	game->map = NULL;

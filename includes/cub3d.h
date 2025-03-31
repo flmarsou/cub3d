@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/03 09:34:00 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:32:02 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ typedef struct s_game
 	char			*so_path;			// Path to south texture (SO)
 	char			*we_path;			// Path to west texture (WE)
 	char			*ea_path;			// Path to east texture (EA)
+	char			*d_path;			// Path to door texture
 	char			*floor_raw;			// Color String (F)
 	char			*ceiling_raw;		// Color String (C)
 	char			**map;				// 2D Array to store the map
@@ -111,6 +112,7 @@ typedef struct s_game
 	bool			player_found;		// Flag bool for player detection
 	char			facing;				// Starting facing direction
 	unsigned int	height;				// Map Height
+	bool			has_doors;			// Checks if map has doors
 	// Raycasting
 	float			pos_x;				// Player X position
 	float			pos_y;				// Player Y position
@@ -173,7 +175,7 @@ typedef struct s_mlx
 	void				*mlx;
 	void				*win;
 	struct s_image		image;
-	struct s_texture	texture[4];
+	struct s_texture	texture[5];
 	bool				key_pressed[9];
 	unsigned int		frames;
 }	t_mlx;
@@ -191,9 +193,6 @@ typedef struct s_data
 
 // Free
 void			free_game_struct(t_game *game);
-
-// Debug
-void			print_file(t_game game);
 
 //============================================================================//
 //     Utils                                                                  //

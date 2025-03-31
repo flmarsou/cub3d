@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:45:17 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/02/27 12:26:42 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/03/31 10:33:34 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,22 @@ static bool	init_we_ea(t_game game, t_mlx *mlx)
 	return (true);
 }
 
+static bool	init_d(t_game game, t_mlx *mlx)
+{
+	mlx->texture[4].img = mlx_xpm_file_to_image(mlx->mlx, game.d_path,
+			&mlx->texture[4].width,
+			&mlx->texture[4].height);
+	if (!mlx->texture[4].img)
+		return (printf(ERR"Door texture \"%s\" not found!\n"RESET,
+				game.d_path), false);
+	return (true);
+}
+
 bool	init_texture(t_game game, t_mlx *mlx)
 {
 	if (!init_no_so(game, mlx) || !init_we_ea(game, mlx))
+		return (false);
+	if (game.has_doors && !init_d(game, mlx))
 		return (false);
 	return (true);
 }
