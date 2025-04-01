@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:17:49 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 10:51:16 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:53:32 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static bool	check_closed(t_game *game)
 				|| game->map[y][x] == 'N' || game->map[y][x] == 'S'
 				|| game->map[y][x] == 'W' || game->map[y][x] == 'E')
 			{
-				if (game->map[y + 1][x] == ' '
-					|| game->map[y - 1][x] == ' '
-					|| game->map[y][x + 1] == ' '
-					|| game->map[y][x - 1] == ' ')
+				if (!game->map[y + 1][x] || game->map[y + 1][x] == ' '
+					|| !game->map[y - 1][x] || game->map[y - 1][x] == ' '
+					|| !game->map[y][x + 1] || game->map[y][x + 1] == ' '
+					|| !game->map[y][x - 1] || game->map[y][x - 1] == ' ')
 					return (error_map(4, 0, x, y + 1));
 			}
 			x++;
@@ -50,9 +50,8 @@ static bool	check_sides(t_game *game)
 	y = 0;
 	while (game->map[y])
 	{
-		if ((game->map[y][0] != ' ' && game->map[y][0] != '1')
-			|| (game->map[y][ft_strlen(game->map[y]) - 1] != ' '
-			&& game->map[y][ft_strlen(game->map[y]) - 1] != '1'))
+		if ((game->map[y][0] == '0')
+			|| (game->map[y][ft_strlen(game->map[y]) - 1] == '0'))
 			return (error_map(4, 0, 0, y));
 		y++;
 	}
@@ -68,7 +67,7 @@ static bool	check_top_bottom(t_game *game)
 	x = 0;
 	while (game->map[0][x])
 	{
-		if (game->map[0][x] != ' ' && game->map[0][x] != '1')
+		if (game->map[0][x] == '0')
 			return (error_map(4, 0, x, 0));
 		x++;
 	}
@@ -76,7 +75,7 @@ static bool	check_top_bottom(t_game *game)
 	y = game->height;
 	while (game->map[y][x])
 	{
-		if (game->map[y][x] != ' ' && game->map[y][x] != '1')
+		if (game->map[y][x] == '0')
 			return (error_map(4, 0, x, y));
 		x++;
 	}
