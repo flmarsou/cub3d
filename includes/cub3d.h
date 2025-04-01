@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 10:41:42 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 15:24:29 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:16:01 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ typedef struct s_game
 	int				draw_end;			// Bottom of the wall
 	// Other
 	float			speed_multiplier;	// Running and diagonal speed
+	int				scan_y;				// Minimap Y
+	int				scan_x;				// Minimap X
 }	t_game;
 
 //====================================//
@@ -518,10 +520,15 @@ void			raycast_doors(t_game *game, t_mlx *mlx, unsigned char frame);
 
 // TODO: Comments
 void			draw_walls(t_game *game, t_mlx *mlx, unsigned int x);
-void			draw_doors(t_game *game, t_mlx *mlx, unsigned int x, unsigned char frame);
+void			draw_doors(t_game *game, t_mlx *mlx, unsigned int x,
+					unsigned char frame);
 
 // TODO: Comments
 void			render(t_game *game, t_mlx *mlx);
+
+// TODO: Comments
+int				handle_keypress(int key, t_data *data);
+int				handle_keyrelease(int key, t_data *data);
 
 /**
  * @brief Calculates the player's movement speed based on game settings.

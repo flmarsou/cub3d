@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 09:47:48 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 15:06:39 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:17:47 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	loop(t_data *data)
 
 	speed = get_speed(data->game, data->mlx);
 	if (data->mlx->key_pressed[0])
-		rotate(data->game, ROT_SPEED);
-	if (data->mlx->key_pressed[1])
 		rotate(data->game, -ROT_SPEED);
+	if (data->mlx->key_pressed[1])
+		rotate(data->game, ROT_SPEED);
 	if (data->mlx->key_pressed[2])
 		move(data->game, KEY_W, speed);
 	if (data->mlx->key_pressed[3])
@@ -37,66 +37,14 @@ static int	loop(t_data *data)
 	return (0);
 }
 
-static int	handle_keypress(int key, t_data *data)
-{
-	if (key == KEY_ESC)
-		close_game(data);
-	if (key == KEY_ARROW_LEFT)
-		data->mlx->key_pressed[0] = true;
-	if (key == KEY_ARROW_RIGHT)
-		data->mlx->key_pressed[1] = true;
-	if (key == KEY_W)
-		data->mlx->key_pressed[2] = true;
-	if (key == KEY_A)
-		data->mlx->key_pressed[3] = true;
-	if (key == KEY_S)
-		data->mlx->key_pressed[4] = true;
-	if (key == KEY_D)
-		data->mlx->key_pressed[5] = true;
-	if (key == KEY_LEFT_SHIFT)
-		data->mlx->key_pressed[6] = true;
-	if (key == KEY_M && !data->mlx->key_pressed[7])
-		data->mlx->key_pressed[7] = true;
-	else if (key == KEY_M && data->mlx->key_pressed[7])
-		data->mlx->key_pressed[7] = false;
-	if (key == KEY_LEFT_CTRL)
-		data->mlx->key_pressed[8] = true;
-	if (key == KEY_E && !data->game->doors_interact)
-		data->game->doors_interact = true;
-	else if (key == KEY_E && data->game->doors_interact)
-		data->game->doors_interact = false;
-	return (0);
-}
-
-static int	handle_keyrelease(int key, t_data *data)
-{
-	if (key == KEY_ARROW_LEFT)
-		data->mlx->key_pressed[0] = false;
-	if (key == KEY_ARROW_RIGHT)
-		data->mlx->key_pressed[1] = false;
-	if (key == KEY_W)
-		data->mlx->key_pressed[2] = false;
-	if (key == KEY_A)
-		data->mlx->key_pressed[3] = false;
-	if (key == KEY_S)
-		data->mlx->key_pressed[4] = false;
-	if (key == KEY_D)
-		data->mlx->key_pressed[5] = false;
-	if (key == KEY_LEFT_SHIFT)
-		data->mlx->key_pressed[6] = false;
-	if (key == KEY_LEFT_CTRL)
-		data->mlx->key_pressed[8] = false;
-	return (0);
-}
-
 static int	handle_mouse(int cursor_x, int cursor_y, t_data *data)
 {
 	(void)cursor_y;
 	mlx_mouse_move(data->mlx->mlx, data->mlx->win, WIN_X / 2, WIN_Y / 2);
 	if (cursor_x < WIN_X / 2)
-		rotate(data->game, ROT_SPEED * 2.5f);
-	if (cursor_x > WIN_X / 2)
 		rotate(data->game, -ROT_SPEED * 2.5f);
+	if (cursor_x > WIN_X / 2)
+		rotate(data->game, ROT_SPEED * 2.5f);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:10:30 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 15:14:29 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/04/01 10:09:20 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,31 +40,29 @@ static void	fill_grid(t_game game,
 		unsigned char grid[CELL_COUNT][CELL_COUNT],
 		unsigned int x, unsigned int y)
 {
-	int				scan_y;
-	int				scan_x;
-
-	scan_y = (int)game.pos_y - CELL_COUNT / 2;
+	game.scan_y = (int)game.pos_y - CELL_COUNT / 2;
 	while (++y < CELL_COUNT)
 	{
 		x = -1;
-		scan_x = (int)game.pos_x - CELL_COUNT / 2;
+		game.scan_x = (int)game.pos_x - CELL_COUNT / 2;
 		while (++x < CELL_COUNT)
 		{
-			if (scan_y < 0 || scan_y > (int)game.height || scan_x < 0
-				|| scan_x >= (int)ft_strlen(game.map[scan_y])
-				|| game.map[scan_y][scan_x] == ' ')
+			if (game.scan_y < 0 || game.scan_y > (int)game.height
+				|| game.scan_x < 0
+				|| game.scan_x >= (int)ft_strlen(game.map[game.scan_y])
+				|| game.map[game.scan_y][game.scan_x] == ' ')
 				grid[y][x] = ' ';
-			else if (game.map[scan_y][scan_x] == '0')
+			else if (game.map[game.scan_y][game.scan_x] == '0')
 				grid[y][x] = '0';
-			else if (game.map[scan_y][scan_x] == '1')
+			else if (game.map[game.scan_y][game.scan_x] == '1')
 				grid[y][x] = '1';
-			else if (game.map[scan_y][scan_x] == 'D')
+			else if (game.map[game.scan_y][game.scan_x] == 'D')
 				grid[y][x] = 'D';
 			else
 				grid[y][x] = '2';
-			scan_x++;
+			game.scan_x++;
 		}
-		scan_y++;
+		game.scan_y++;
 	}
 	grid[CELL_COUNT / 2][CELL_COUNT / 2] = 'P';
 }

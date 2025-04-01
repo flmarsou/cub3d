@@ -6,11 +6,23 @@
 /*   By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 12:58:43 by flmarsou          #+#    #+#             */
-/*   Updated: 2025/03/31 15:22:57 by flmarsou         ###   ########.fr       */
+/*   Updated: 2025/04/01 09:56:47 by flmarsou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	texture_frame(unsigned char frame, t_game *game)
+{
+	if (frame >= 0 && frame <= 64)
+		game->texture = 4;
+	else if (frame >= 64 && frame <= 128)
+		game->texture = 5;
+	else if (frame >= 128 && frame <= 192)
+		game->texture = 6;
+	else
+		game->texture = 7;
+}
 
 static int	calculate_texture_x(t_game game, t_mlx mlx)
 {
@@ -30,20 +42,14 @@ static int	calculate_texture_x(t_game game, t_mlx mlx)
 	return (texture_x);
 }
 
-void	draw_doors(t_game *game, t_mlx *mlx, unsigned int x, unsigned char frame)
+void	draw_doors(t_game *game, t_mlx *mlx, unsigned int x,
+	unsigned char frame)
 {
 	int		y;
 	int		color;
 	int		offset;
 
-	if (frame >= 0 && frame <= 64)
-		game->texture = 4;
-	else if (frame >= 64 && frame <= 128)
-		game->texture = 5;
-	else if (frame >= 128 && frame <= 192)
-		game->texture = 6;
-	else
-		game->texture = 7;
+	texture_frame(frame, game);
 	game->texture_x = calculate_texture_x(*game, *mlx);
 	game->step = (float)mlx->texture[game->texture].height / game->line_height;
 	game->texture_pos = (game->draw_start - WIN_Y / 2 + game->line_height / 2)

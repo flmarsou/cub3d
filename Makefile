@@ -6,7 +6,7 @@
 #    By: flmarsou <flmarsou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/12 10:49:02 by flmarsou          #+#    #+#              #
-#    Updated: 2025/03/31 14:20:27 by flmarsou         ###   ########.fr        #
+#    Updated: 2025/04/01 10:16:21 by flmarsou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRC_MLX		:=	game_loop.c \
 				minimap.c \
 				render.c \
 				movement.c \
+				keys.c \
 				game_stop.c \
 
 SOURCES		:= ${SRC} ${SRC_UTILS} ${SRC_PARSER} ${SRC_MLX}
